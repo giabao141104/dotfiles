@@ -1,1 +1,596 @@
+/*================== Nord for Firefox ==================
+Author: dpcdpc11.deviantart.com
+ENJOY!
+*/
 
+/*================ GLOBAL COLORS ================*/
+:root {
+	--night_color1: #2E3440;
+	--night_color2: #3B4252;
+	--night_color3: #434C5E;
+	--night_color4: #4C566A;
+	
+	--snow_color1: #D8DEE9;
+	--snow_color2: #E5E9F0;
+	--snow_color3: #ECEFF4;
+	
+	--frost_color1: #8FBCBB;
+	--frost_color2: #88C0D0;
+	--frost_color3: #81A1C1;
+	--frost_color4: #5E81AC;
+	
+	--aurora_color1: #BF616A;
+	--aurora_color2: #D08770;
+	--aurora_color3: #EBCB8B;
+	--aurora_color4: #A3BE8C;
+	--aurora_color5: #B48EAD;
+}
+
+/*================ LIGHT THEME ================*/
+:root {
+	
+}
+
+/*================ DARK THEME ================*/
+:root:-moz-lwtheme-brighttext,
+toolbar[brighttext] {
+
+}
+
+
+/*================== MAIN HEADER ==================*/
+toolbox#navigator-toolbox  {
+	border: 0 !important;
+}
+
+/*================== TABS BAR ==================*/
+#titlebar #TabsToolbar {
+	padding: 6px 0px 2px 6px !important;
+	background: var(--night_color1) !important;
+}
+.titlebar-spacer[type="pre-tabs"] {
+	/* border: 0 !important; */
+	display: none;
+}
+
+/*BROWSER TAB*/
+#tabbrowser-tabs:not([movingtab]) > .tabbrowser-tab[beforeselected-visible]::after, #tabbrowser-tabs[movingtab] > .tabbrowser-tab[visuallyselected]::before, .tabbrowser-tab[visuallyselected]::after {
+    opacity: 0 !important;
+}
+.tab-line {
+    height: 0px !important;
+}
+
+.tabbrowser-tab {
+    margin-right: 5px !important;
+}
+.tabbrowser-tab:not([visuallyselected="true"]), .tabbrowser-tab:-moz-lwtheme {
+    color: var(--frost_color3) !important;
+}
+
+.tabbrowser-tab > .tab-stack > .tab-background {
+	border-radius: 14px !important;
+}
+.tabbrowser-tab > .tab-stack > .tab-background:not([selected="true"]) {
+	background-color: var(--night_color1) !important;
+}
+.tabbrowser-tab:hover > .tab-stack > .tab-background:not([selected="true"]) {
+    background-color: var(--night_color1) !important;
+}
+
+tab[selected="true"] .tab-content {
+	color: var(--snow_color3) !important;
+}
+tab[selected="true"] .tab-background {
+	background: var(--night_color2) !important;
+}
+
+.tabbrowser-tab::after, .tabbrowser-tab::before {
+    border-left: 0 !important;
+    opacity: 0 !important;
+}
+
+/*TAB CLOSE BUTTON*/
+.tab-close-button {
+    transition: all 0.3s ease !important;
+    border-radius: 14px !important;
+    color: var(--frost_color1) !important;
+}
+.tab-close-button:hover {
+    fill-opacity: 0.2 !important;
+}
+
+
+/*================== BOOKMARKS TOOLBAR ==================*/
+#PersonalToolbar {
+	background: var(--night_color1) !important;
+	color: var(--frost_color3) !important;
+	padding-bottom: 6px !important;
+	padding-top: 2px !important;
+}
+toolbarbutton.bookmark-item {
+	transition: all 0.3s ease !important;
+    padding: 3px 5px !important;
+}
+#PlacesToolbar toolbarseparator {
+	-moz-appearance: none !important;
+	width: 1px;
+	margin: 0 8px !important;
+	background-color: var(--frost_color3) !important;
+}
+
+
+/*================== CAPTION BUTTONS ==================*/
+.titlebar-buttonbox {
+    position: relative;
+    margin-right: 0px;
+	margin-top: -10px !important;
+}
+.titlebar-button {
+	transition: all 0.3s ease !important;
+	padding: 8px 10px !important;
+	background: none !important;
+}
+.titlebar-button.titlebar-close {
+	padding-right: 26px !important;
+}
+.titlebar-button > .toolbarbutton-icon {
+	transition: all 0.3s ease !important;
+	list-style-image: none;
+	border-radius: 14px;
+	width: 14px !important;
+	height: 14px !important;
+}
+
+/* the 12px image renders a 10px icon, and the 10px upscaled gets rounded to 12.5, which
+* rounds up to 13px, which makes the icon one pixel too big on 1.25dppx. Fix: */
+@media (min-resolution: 1.20dppx) and (max-resolution: 1.45dppx) {
+.titlebar-button > .toolbarbutton-icon {
+	width: 14px !important;
+	height: 14px !important;
+}
+}
+
+/* 175% dpi should result in the same device pixel sizes as 150% dpi. */
+@media (min-resolution: 1.45dppx) and (max-resolution: 1.70dppx) {
+.titlebar-button > .toolbarbutton-icon {
+	width: 14px !important;
+	height: 14px !important;
+}
+}
+
+/* 175% dpi should result in the same device pixel sizes as 150% dpi. */
+@media (min-resolution: 1.70dppx) and (max-resolution: 1.95dppx) {
+.titlebar-button > .toolbarbutton-icon {
+	width: 14px !important;
+	height: 14px !important;
+}
+}
+
+.titlebar-button:hover > .toolbarbutton-icon {
+	background: none !important;
+}
+.titlebar-button.titlebar-min > .toolbarbutton-icon {
+	list-style-image: url('data:image/svg+xml;utf8,<svg width="100%" height="100%" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"><g transform="matrix(1,0,0,1,-267,-272)"><g id="min_btn"><rect x="269" y="278" width="10" height="2" style="fill:rgb(235,203,139);"/></g></g></svg>');
+}
+.titlebar-button.titlebar-max > .toolbarbutton-icon,
+.titlebar-button.titlebar-restore > .toolbarbutton-icon {
+	list-style-image: url('data:image/svg+xml;utf8,<svg width="100%" height="100%" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"><g transform="matrix(1,0,0,1,-599,-254)"><g id="max_btn" transform="matrix(0.707107,-0.707107,0.707107,0.707107,-9.17935,502.829)"><path d="M602,263L610,263L610,260.995L613,263.995L610,266.995L610,264.99L602,264.99L602,266.995L599,263.995L602,260.995L602,263Z" style="fill:rgb(163,190,140);"/></g></g></svg>');
+}
+.titlebar-button.titlebar-close > .toolbarbutton-icon {
+    list-style-image: url('data:image/svg+xml;utf8,<svg width="100%" height="100%" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"><g transform="matrix(1,0,0,1,-632,-255)"><path id="close_btn" d="M638.979,260.586L643.221,256.343L644.635,257.757L640.393,262L644.635,266.243L643.221,267.657L638.979,263.414L634.736,267.657L633.322,266.243L637.564,262L633.322,257.757L634.736,256.343L638.979,260.586Z" style="fill:rgb(191,97,106);"/></g></svg>');
+}
+.titlebar-button.titlebar-min:hover > .toolbarbutton-icon {
+	list-style-image: url('data:image/svg+xml;utf8,<svg width="100%" height="100%" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"><g transform="matrix(1,0,0,1,-566,-296)"><g id="min_hover_btn" transform="matrix(1,0,0,1,0,20)"><path d="M574,282L578,282L578,284L574,284L574,288L572,288L572,284L568,284L568,282L572,282L572,278L574,278L574,282Z" style="fill:rgb(235,203,139);"/></g></g></svg>');
+}
+.titlebar-button.titlebar-max:hover > .toolbarbutton-icon,
+.titlebar-button.titlebar-restore:hover > .toolbarbutton-icon {
+	list-style-image: url('data:image/svg+xml;utf8,<svg width="100%" height="100%" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"><g transform="matrix(1,0,0,1,-599,-296)"><g id="max_hover_btn" transform="matrix(1,0,0,1,33,20)"><path d="M574,282L578,282L578,284L574,284L574,288L572,288L572,284L568,284L568,282L572,282L572,278L574,278L574,282Z" style="fill:rgb(163,190,140);"/></g></g></svg>');
+}
+.titlebar-button.titlebar-close:hover > .toolbarbutton-icon {
+	list-style-image: url('data:image/svg+xml;utf8,<svg width="100%" height="100%" viewBox="0 0 14 14" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"><g transform="matrix(1,0,0,1,-631,-296)"><g id="close_hover_btn" transform="matrix(1,0,0,1,64.957,20)"><path d="M574,282L578,282L578,284L574,284L574,288L572,288L572,284L568,284L568,282L572,282L572,278L574,278L574,282Z" style="fill:rgb(191,97,106);"/></g></g></svg>');
+}
+
+
+/*================== NEW TAB BUTTON ==================*/
+toolbar #tabs-newtab-button:not([disabled="true"]):not([checked]):not([open]):not(:active) > .toolbarbutton-icon,
+toolbar #tabs-newtab-button:not([disabled="true"]):-moz-any([open], [checked], :hover:active) > .toolbarbutton-icon,
+toolbar #tabs-newtab-button:not([disabled="true"]):-moz-any([open], [checked], :active) > .toolbarbutton-icon {
+	transition: all 0.3s ease !important;
+	fill: var(--frost_color3) !important;
+	border-radius: 14px !important;
+	background-color: var(--night_color1) !important;
+}
+toolbar #tabs-newtab-button:not([disabled="true"]):not([checked]):not([open]):not(:active):hover > .toolbarbutton-icon {
+	background-color: var(--night_color3) !important;
+}
+
+
+/*================== NAV BAR ==================*/
+toolbar#nav-bar {
+	background: var(--night_color1) !important;
+	box-shadow: none !important;
+	padding-bottom: 3px !important;
+}
+toolbar#nav-bar toolbarbutton .toolbarbutton-icon,
+toolbar#nav-bar toolbarbutton #fxa-avatar-image {
+	transition: all 0.3s ease !important;
+	fill: var(--frost_color3) !important;
+}
+#urlbar > #urlbar-background {
+	border-radius: 14px !important;
+	border: 0 !important;
+	background: var(--night_color2) !important;
+}
+#urlbar:not([focused="true"]) > #urlbar-background,
+#urlbar > #urlbar-input-container {
+	border-radius: 14px !important;
+	color: var(--frost_color3) !important;
+}
+#PersonalToolbar .toolbarbutton-1:not([disabled="true"]):not([checked]):not([open]):not(:active):hover, .tabbrowser-arrowscrollbox:not([scrolledtostart="true"])::part(scrollbutton-up):hover, .tabbrowser-arrowscrollbox:not([scrolledtoend="true"])::part(scrollbutton-down):hover, .findbar-button:not(:-moz-any([checked="true"], [disabled="true"])):hover, toolbarbutton.bookmark-item:not(.subviewbutton):hover:not([disabled="true"]):not([open]), toolbar .toolbarbutton-1:not([disabled="true"]):not([checked]):not([open]):not(:active):hover > .toolbarbutton-icon, toolbar .toolbarbutton-1:not([disabled="true"]):not([checked]):not([open]):not(:active):hover > .toolbarbutton-text, toolbar .toolbarbutton-1:not([disabled="true"]):not([checked]):not([open]):not(:active):hover > .toolbarbutton-badge-stack {
+	background: var(--night_color2) !important;
+}
+
+#PersonalToolbar .toolbarbutton-1:not([disabled="true"]):-moz-any([open], [checked], :hover:active), .findbar-button:not([disabled="true"]):-moz-any([checked="true"], :hover:active), toolbarbutton.bookmark-item:not(.subviewbutton):hover:active:not([disabled="true"]), toolbarbutton.bookmark-item[open="true"], toolbar .toolbarbutton-1:not([disabled="true"]):-moz-any([open], [checked], :hover:active) > .toolbarbutton-icon, toolbar .toolbarbutton-1:not([disabled="true"]):-moz-any([open], [checked], :hover:active) > .toolbarbutton-text, toolbar .toolbarbutton-1:not([disabled="true"]):-moz-any([open], [checked], :hover:active) > .toolbarbutton-badge-stack {
+	background: var(--night_color3) !important;
+}
+
+:root:not([uidensity="compact"]) #back-button > .toolbarbutton-icon {
+	background-color: transparent !important;
+}
+
+#urlbar {
+	color: var(--frost_color3) !important;
+}
+.urlbarView-url {
+	color: var(--snow_color1) !important;
+}
+
+
+/*================== SIDEBAR ==================*/
+#sidebar-box,
+.sidebar-panel[lwt-sidebar-brighttext] {
+	background-color: var(--night_color1) !important;
+        border-radius: 14px;
+}
+#sidebar-header {
+	border-color: var(--night_color2) !important;
+        border-radius: 14px;
+}
+.sidebar-splitter {
+	border-color: var(--night_color2) !important;
+}
+
+#sidebar-switcher-bookmarks > .toolbarbutton-icon,
+#sidebar-box[sidebarcommand="viewBookmarksSidebar"] > #sidebar-header > #sidebar-switcher-target > #sidebar-icon,
+#sidebar-header,
+#sidebar-title {
+	color: var(--frost_color3) !important;
+}
+#sidebar-switcher-target:hover,
+#sidebar-switcher-target:hover:active, #sidebar-switcher-target.active,
+#viewButton:hover,
+#viewButton[open] {
+	background-color: var(--night_color2) !important;
+}
+.sidebar-placesTreechildren {
+	color: var(--frost_color3) !important;
+}
+#search-box,
+.search-box {
+	-moz-appearance: none !important;
+	background-color: var(--night_color2) !important;
+	border-radius: 14px !important;
+	color: var(--frost_color3) !important;
+}
+.content-container {
+	background-color: var(--night_color1) !important;
+	color: var(--frost_color3) !important;
+}
+#viewButton {
+	color: var(--frost_color3) !important;
+}
+
+
+/*================== CONTEXTMENU ==================*/
+/*Please note that names of selectors are case sensitive, please note that some context menu items use an underscore instead of a dash.
+ 
+In order to remove context menu items start the userChrome CSS file with the @namespace line of code and then follow that with the names of the context menu items with commas between each item; this includes context menu selectors that have a comment block between itself and the next context menu selector. At the end of the list of context menu selectors end with this:      {display: none !important;}
+*/
+ 
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+/*Removes Items from Tab Context Menu*/
+#context_reloadTab,
+#context_toggleMuteTab,
+#context_pinTab,
+#context_unpinTab,
+#context_duplicateTab,
+#context_openTabInWindow,
+#context_sendTabToDevice_separator,
+#context_sendTabToDevice,
+#context_reloadAllTabs,
+#context_bookmarkAllTabs,
+#context_closeTabsToTheEnd,
+#context_closeOtherTabs,
+#context_undoCloseTab,
+#context_closeTab,
+/*----- Removes Separators from the Tab Context Menu. Keep in mind that for each separator below there are multiple selector ID's that I was able to identify that work. You only need to choose one in order to remove the specified separator.
+
+1st separator*/
+menuitem[label="Mute Tab"] + menuseparator,
+#context_toggleMuteTab+menuseparator,
+/*2nd separator*/
+menuitem[label="Move to New Window"] + menuseparator,
+#context_openTabInWindow+menuseparator,
+/*3rd separator*/
+#context_sendTabToDevice_separator,
+#context_sendTabToDevice+menuseparator,
+/*4th separator*/
+menuitem[label="Close Other Tabs"] + menuseparator,
+#context_closeOtherTabs+menuseparator,
+/*5th separator*/
+menuitem[label="Close Tab"] + menuseparator,
+#context_closeTab+menuseparator,
+/*Removes Items from Right Click Context Menu; Diagram here: https://imgur.com/b5gEfUy */
+#context-back,
+#context-forward,
+#context-reload,
+#context-stop,
+#context-bookmarkpage,
+#context-navigation,
+#context-sep-navigation,
+#context-savepage,
+#context-pocket,
+#context-sep-sendpagetodevice,
+#context-sendpagetodevice,
+#context-sep-viewbgimage,
+#context-viewbgimage,
+#context-selectall,
+#context-sep-selectall,
+#context-sep-viewsource,
+#context-viewsource,
+#context-viewinfo,
+#inspect-separator,
+#context-inspect,
+#contentAreaContextMenu > menuseparator:nth-child(92),
+#screenshots_mozilla_org_create-screenshot,
+/*Removes Items from Right Click on Selected Links Context Menu; Diagram here: https://imgur.com/e9AaMx3 */
+#context-openlinkintab,
+#context-openlinkinusercontext-menu,
+#context-openlink,
+#context-openlinkprivate,
+#context-sep-open,
+#context-bookmarklink,
+#context-savelink,
+#context-savelinktopocket,
+#context-copylink,
+#context-copy,
+#context-sep-selectall,
+#context-searchselect,
+#context-sep-sendlinktodevice,
+#context-sendlinktodevice,
+#context-viewpartialsource-selection,
+#inspect-separator,
+#context-inspect,
+#contentAreaContextMenu > menuseparator:nth-child(92) /*This is a Separator*/
+{
+background: var(--night_color1) !important;
+background-color: var(--night_color1) !important;
+color: var(--frost_color3) !important;
+padding-bottom: 0px !important;
+padding-top: 0px !important;
+opacity: 1 !important;
+}
+
+
+/*==================	MENU	====================*/
+
+menupopup {
+	-moz-appearance: none !important;
+	padding: 0px 0px 0px 0px !important;
+	background-color:  var(--night_color1) !important;
+	border: 0px !important;
+	min-width: 0px !important;
+	border-radius: 14px !important;
+}
+menuseparator {
+	-moz-appearance: none !important;
+	border: none !important;
+	padding: 0px 0px 0px 0px !important;
+	margin: 0px 0px 0px 0px !important;
+	background-color: var(--night_color4) !important;
+}
+menuitem, menu {
+	color: var(--frost_color3) !important;
+	padding: 0px 0px 0px 0px !important;
+	border-radius: 14px !important;
+}
+menuitem[disabled="true"], menuitem[disabled="true"] > .menu-text {
+	color: gray !important;
+}
+menuitem:hover, menu:hover, menu[open="true"], menuitem[_moz-menuactive="true"]	 {
+	padding: 0px 0px 0px 0px !important;
+	background-color: var(--night_color3) !important;
+        border-radius: 14px !important;
+}
+menugroup {
+	padding: 0px !important;
+	background-color: transparent !important;
+	border-radius: 14px !important;
+}
+menuitem > .menu-text, menuitem > .menu-iconic-text {
+	color: white !important;
+}
+menuitem[type="checkbox"] {
+	padding: 0px !important;
+}
+menuitem[type="radio"] {
+	padding-left: 8px !important;
+	padding-top: 6.5px !important;
+	padding-bottom: 6.5px !important;
+}
+menuitem[type="checkbox"] > .menu-iconic-text, menuitem[type="radio"] > .menu-iconic-text {
+	padding-left: 5px !important;
+}
+menuitem[checked="true"][type="checkbox"] > .menu-iconic-left {
+	padding: 7px 0px 0px 0px !important;
+	border: solid white;
+	border-width: 0 0 2px 2px;
+	transform: rotate(-45deg) scale(.75);
+	margin-bottom: 4px !important;
+}
+menuitem[checked="true"][type="radio"] > .menu-iconic-left {
+	padding: 1px !important;
+	border: solid white;
+	height: 17px !important;
+	border-radius: 100%;
+	background: white;
+	transform: scale(.5); 
+}
+menucaption {
+	background-color: transparent !important;
+	color: white !important;
+}
+#ContentSelectDropdown > menupopup {
+	background-image: none !important;
+	border-radius: 14px !important;
+}
+#ContentSelectDropdown {
+	padding: 0px !important;
+	border-radius: 14px !important;
+}
+menulist {
+	padding: 4px 4px 4px 4px !important;
+	border: 2px solid #666666 !important;
+	background-color: var(--night_color1) !important;
+	border-radius: 14px !important;
+}
+menulist:hover {
+	padding: 4px 4px 4px 4px !important;
+	border: 2px solid #999999 !important;
+	background-color: transparent !important;
+}
+menulist[open="true"]  {
+	border: 0px !important;
+	background-color: #333333 !important;
+	border-radius: 14px !important;
+}
+#context-back > .menu-iconic-left, #context-forward > .menu-iconic-left, #context-reload > .menu-iconic-left, #context-stop > .menu-iconic-left, #context-bookmarkpage > .menu-iconic-left {
+	padding: 0px !important;
+	border-radius: 14px !important;
+}
+.menu-iconic-left {
+	-moz-appearance: none !important;
+	padding: 0px 5px 0px 9px !important;
+}
+.menu-right {
+	-moz-appearance: none !important;
+	padding: 7.5px !important;
+	margin-right: 6px !important;
+	color: white !important;
+	border: solid white;
+	border-width: 0 2px 2px 0px;
+	transform: rotate(-45deg) scale(.55);
+}
+tooltip {
+	-moz-appearance: none !important;
+	color: white !important;
+	background-color: #2B2B2B !important;
+	border: 1px solid #767676 !important;
+	padding: 6.5px !important;
+}
+
+
+/*** Megabar Styler General - version 2020-04-19 ***/
+  /*** General Preferences ***/
+  :root {
+    /* Number of pixels of enlargement when URL bar is focused */
+    --mbarstyler-popout-pixels: 0px; /* [0px - 7px] */
+    /* Top Bar Display or Not */
+    --mbarstyler-top-bar-display: none; /* [block,none] */
+    /* Font sizes (default: 13.8px for title, 10.2px for URL) */
+    --mbarstyler-title-font-size: 15px; /* [13px - 18px] */
+    --mbarstyler-url-font-size: 13px; /* [12px - 16px] */
+    /* Rows to show without scrolling */
+    --mbarstyler-max-rows-without-scrolling: 8;
+    /* Bottom border for each result row */
+    --mbarstyler-bottom-border-width: 0px; /* [0px or 1px] */
+    /* Match display style */
+    --mbarstyler-match-weight: 700; /* [400,700] */
+    --mbarstyler-match-background-opacity: 0.0; /* [0.0,0.05,0.1] */
+  }
+  /*** URL bar enlargement or lack thereof ***/
+  /* Compute new position, width, and padding */
+  #urlbar[breakout][breakout-extend] {
+    top: calc(7px - var(--mbarstyler-popout-pixels)) !important;
+    left: calc(0px - var(--mbarstyler-popout-pixels)) !important;
+    width: calc(100% + (2 * var(--mbarstyler-popout-pixels))) !important;
+    padding: var(--mbarstyler-popout-pixels) !important;
+  }
+  [uidensity="compact"] #urlbar[breakout][breakout-extend] {
+    top: calc(6px - var(--mbarstyler-popout-pixels)) !important;
+  }
+  [uidensity="touch"] #urlbar[breakout][breakout-extend] {
+    top: calc(5px - var(--mbarstyler-popout-pixels)) !important;
+  }
+  /* Prevent shift of URL bar contents */
+  #urlbar[breakout][breakout-extend] > #urlbar-input-container {
+    height: var(--urlbar-height) !important;
+    padding: 0 !important;
+  }
+  /* Do not animate */
+  #urlbar[breakout][breakout-extend] > #urlbar-background {
+    animation: none !important;;
+  }
+  /* Remove shadows */
+  #urlbar[breakout][breakout-extend] > #urlbar-background {
+    box-shadow: none !important;
+  }
+  /*** Top "Blue Bar" Display ***/
+  .urlbarView-row:first-of-type {
+    display: var(--mbarstyler-top-bar-display) !important;
+  }
+  /*** Font Sizes and Scrolling ***/
+  /* Title font-size */
+  .urlbarView-row .urlbarView-title {
+    font-size: var(--mbarstyler-title-font-size) !important;
+  }
+  /* URL / action font-size */
+  .urlbarView-row .urlbarView-secondary,
+  .urlbarView-row .urlbarView-url,
+  .urlbarView-row .urlbarView-action {
+    font-size: var(--mbarstyler-url-font-size) !important;
+  }
+  /* Set max-height for items visible without scrolling */
+  #urlbarView-results, #urlbar-results {
+    height: unset !important;
+    max-height: calc(2.5 * (var(--mbarstyler-title-font-size) + var(--mbarstyler-bottom-border-width)) * var(--mbarstyler-max-rows-without-scrolling)) !important;
+  }
+  #urlbar-results {
+    overflow-y: auto !important; 
+  }
+  /* Clean up extra spacing at the top and bottom */  
+  #urlbar-results {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+  }
+  /* Subtle border between results */
+  .urlbarView-row:not(:last-of-type) {
+    border-bottom: var(--mbarstyler-bottom-border-width) solid rgba(0, 0, 0, 0.1) !important;
+  }
+  /* Match Styling Like Fx43-47 */
+  [lwt-popup-darktext] .urlbarView-row:not([selected]) .urlbarView-title strong,
+  [lwt-popup-darktext] .urlbarView-row:not([selected]) .urlbarView-url strong {
+    font-weight: var(--mbarstyler-match-weight) !important;
+    box-shadow: inset 0 0 1px 1px rgba(0, 0, 0, calc(var(--mbarstyler-match-background-opacity) * 2));
+    background-color: rgba(0, 0, 0, var(--mbarstyler-match-background-opacity));
+    border-radius: 14px;
+  }
+  [lwt-popup-brighttext] .urlbarView-row:not([selected]) .urlbarView-title strong,
+  [lwt-popup-brighttext] .urlbarView-row:not([selected]) .urlbarView-url strong {
+    font-weight: var(--mbarstyler-match-weight) !important;
+    box-shadow: inset 0 0 1px 1px rgba(255, 255, 255, calc(var(--mbarstyler-match-background-opacity) * 2));
+    background-color: rgba(255, 255, 255, var(--mbarstyler-match-background-opacity));
+    border-radius: 14px;
+  }
+/*** End of: Megabar Styler General ***/

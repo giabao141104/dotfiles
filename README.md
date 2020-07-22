@@ -5,7 +5,7 @@ My personal modification of [dpcdpc11's Nord for Firefox](https://www.deviantart
 * Removed urlbar expansion
 * Everything round corners
 * Added colors for menus
-* Changed tabs'colors
+* Changed tabs' colors
 
 It's not finished yet, I'll work on it when I have time.
 

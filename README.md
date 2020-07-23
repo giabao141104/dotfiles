@@ -24,3 +24,12 @@ My modification of [dpcdpc11's Nord for Firefox](https://www.deviantart.com/dpcd
 It's not finished yet, I'll work on it when I have time.
 
 ![userChrome.css](https://github.com/giabao141104/dotfiles/blob/master/firefox/2020-07-23_01-46-16_R.png)
+
+# Extra
+## prompt
+### PS1
+![ps1](https://github.com/giabao141104/dotfiles/blob/master/extra/prompt/2020-07-23_23-39-04_A.png)
+It display different kaomoji depending on if the command succeeds or fails
+![logic](https://github.com/giabao141104/dotfiles/blob/master/extra/prompt/2020-07-23_23-38-43_A.png)
+### PS2
+![ps2](https://github.com/giabao141104/dotfiles/blob/master/extra/prompt/2020-07-23_23-38-55_A.png)

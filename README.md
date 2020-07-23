@@ -7,6 +7,12 @@ My dwm statusbar. Font is [sourcecodepro](https://www.archlinux.org/packages/ext
 List of softwares
 ```pacman pulseaudio pamixer speedtest-cli xsetroot coreutils gawk```
 
+What it do:
+* Display download/upload speed, recheck every 10m
+* Show how much space is used in the root directory, package count
+* Show pulseaudio volume
+* Show time and date
+
 # Firefox
 ## userChrome.css
 My modification of [dpcdpc11's Nord for Firefox](https://www.deviantart.com/dpcdpc11/art/Nord-for-Firefox-837860916).

@@ -4,8 +4,7 @@ My dwm statusbar. Font is [sourcecodepro](https://www.archlinux.org/packages/ext
 
 ![statusbar](https://github.com/giabao141104/dotfiles/blob/master/dwm/statusbar.png)
 
-List of softwares
-```pacman pulseaudio pamixer speedtest-cli xorg-xsetroot coreutils```
+List of softwares: ```pacman pulseaudio pamixer speedtest-cli xorg-xsetroot coreutils```
 
 What it do:
 * Display download/upload speed, recheck every 10 minutes

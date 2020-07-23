@@ -8,7 +8,7 @@ List of softwares
 ```pacman pulseaudio pamixer speedtest-cli xsetroot coreutils gawk```
 
 What it do:
-* Display download/upload speed, recheck every 10m
+* Display download/upload speed, recheck every 10 minutes
 * Show how much space is used in the root directory, package count
 * Show pulseaudio volume
 * Show time and date

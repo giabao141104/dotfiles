@@ -1,6 +1,6 @@
 # dwm
 ## Keybind menu
-I made this using ```dunst libnotify```. Script [here](https://github.com/giabao141104/dotfiles/blob/master/bin/key).
+I made this using ```dunst libnotify```, script [here](https://github.com/giabao141104/dotfiles/blob/master/bin/key).
 ![keybind menu](https://github.com/giabao141104/dotfiles/blob/master/dwm/2020-07-26_03-50-21_A.png)
 ![keybind menu](https://github.com/giabao141104/dotfiles/blob/master/dwm/2020-07-26_03-41-53_R.png)
 ## statusbar

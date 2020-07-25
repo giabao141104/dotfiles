@@ -6,11 +6,11 @@ My dwm statusbar. Font is [sourcecodepro](https://www.archlinux.org/packages/ext
 
 List of softwares:```pacman pulseaudio pamixer speedtest-cli xorg-xsetroot coreutils```
 
-What it do:
-* Display download/upload speed, recheck every 10 minutes
-* Show how much space is used in the root directory, package count
-* Show pulseaudio volume
-* Show time and date
+What it show:
+* Download/upload speed, recheck every 10 minutes
+* How much space is used in the root directory, package count
+* Pulseaudio volume
+* Time and date
 
 # Firefox
 ## userChrome.css

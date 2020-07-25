@@ -8,7 +8,7 @@ List of softwares:```pacman pulseaudio pamixer speedtest-cli xorg-xsetroot coreu
 
 What it show:
 * Download/upload speed, recheck every 10 minutes
-* How much space is used in the root directory, package count
+* How much space is used in the root partition, package count
 * Pulseaudio volume
 * Time and date
 

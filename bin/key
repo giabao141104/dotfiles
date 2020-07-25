@@ -1,0 +1,3 @@
+#!/bin/sh
+
+notify-send -h string:x-canonical-private-synchronous:keybind "            KEYBINDS             " "$(printf '<b>┏━ MAIN ━━━━━━━━━━━━━━━━━━━━━━━━━</b>\n<b>┃ </b>Mod+Shift+q     Quit dwm\n<b>┃ </b>Mod+Shift+r     Restart dwm\n<b>┣━ DWM ━━━━━━━━━━━━━━━━━━━━━━━━━━</b>\n<b>┃ </b>Mod+k           Focus up\n<b>┃ </b>Mod+j           Focus down\n<b>┃ </b>Mod+l           Area expand\n<b>┃ </b>Mod+h           Area shrink\n<b>┃ </b>Mod+Shift+t     Tiled layout\n<b>┃ </b>Mod+Shift+m     Monocle layout\n<b>┃ </b>Mod+Shift+f     Floating layout\n<b>┣━ LAUNCHER ━━━━━━━━━━━━━━━━━━━━━</b>\n<b>┃ </b>Mod+p           dmenu\n<b>┃ </b>Mod+t           terminal\n<b>┃ </b>Mod+m           ncmpcpp\n<b>┃ </b>Mod+a           pulsemixer\n<b>┃ </b>Mod+r           newsboat')"

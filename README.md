@@ -40,7 +40,7 @@ It display different kaomoji depending on if the command succeeds or fails
 ![logic](https://github.com/giabao141104/dotfiles/blob/master/extra/prompt/2020-07-23_23-38-43_A.png)
 ### PS2
 ![ps2](https://github.com/giabao141104/dotfiles/blob/master/extra/prompt/2020-07-23_23-38-55_A.png)
-## Discord mpd rich presence
+## Discord mpd rich presence (mpd-pumpko)
 ![mpd rich presence](https://github.com/giabao141104/dotfiles/blob/master/mpd-rich-presence-discord/2020-07-31_04-18-12_A.png)
 
 I modified [SSStormy's mpd-rich-presence-discord](https://github.com/SSStormy/mpd-rich-presence-discord) to change the large image. Here's how you can do it too!

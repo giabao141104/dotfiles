@@ -40,3 +40,13 @@ It display different kaomoji depending on if the command succeeds or fails
 ![logic](https://github.com/giabao141104/dotfiles/blob/master/extra/prompt/2020-07-23_23-38-43_A.png)
 ### PS2
 ![ps2](https://github.com/giabao141104/dotfiles/blob/master/extra/prompt/2020-07-23_23-38-55_A.png)
+## Discord mpd rich presence
+![mpd rich presence](https://github.com/giabao141104/dotfiles/blob/master/mpd-rich-presence-discord/2020-07-30_20-09-25_A.png)
+
+I modified [SSStormy's mpd-rich-presence-discord](https://github.com/SSStormy/mpd-rich-presence-discord) to change the large image. Here's how you can do it too!
+1. Dependencies ```discord-rpc libmpdclient```
+2. Make an [application](https://github.com/SSStormy/mpd-rich-presence-discord)
+3. Upload the 3 buttons in the ```mpd-rich-presence-discord/assets/discord/png/``` to Art Assets under the Rich Presence tab. Rename them to ```pause-circle_png play-circle_png refresh-cw_png``` respectively
+4. Find a good image and upload it to Art Assets, rename it to ```mpd_large```
+5. Modify all the AppId in ```mpd-rich-presence-discord/src/main.cpp``` to the one you just made
+6. Run build.sh and the executable file should be in ```mpd-rich-presence-discord/release```

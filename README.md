@@ -48,5 +48,5 @@ I modified [SSStormy's mpd-rich-presence-discord](https://github.com/SSStormy/mp
 2. Make an [application](https://discord.com/developers/applications)
 3. Upload the 3 buttons in the ```mpd-rich-presence-discord/assets/discord/png/``` to Art Assets under the Rich Presence tab. Rename them to ```pause-circle_png play-circle_png refresh-cw_png``` respectively
 4. Find a good image and upload it to Art Assets, rename it to ```mpd_large```
-5. Modify all the AppId in ```mpd-rich-presence-discord/src/main.cpp``` to the one you just made
+5. Change all the AppId in ```mpd-rich-presence-discord/src/main.cpp``` to the one you just made
 6. Run build.sh and the executable file should be in ```mpd-rich-presence-discord/release```

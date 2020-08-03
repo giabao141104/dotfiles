@@ -1,0 +1,8 @@
+#!/bin/sh
+#  
+#
+#
+while true; do
+xsetroot -name "$(echo $(echo $(echo "" ; cat ~/document/speedtest-result | awk '{print $5}') ; echo $(echo "" ; cat ~/document/speedtest-result | awk '{print $8}') ; echo "" ; echo $(df -H --block-size M /dev/sda3 | tail -1 | awk '{print $3}' ; echo "" ; pacman -Q | wc -l) ; echo "" ; pamixer --get-volume-human ; date +" %H:%M  %d/%m/%Y"))"
+sleep 1m
+done

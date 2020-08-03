@@ -2,8 +2,8 @@
 ## Keybind menu
 I made this using ```dunst libnotify```, script [here](https://github.com/giabao141104/dotfiles/blob/master/bin/key).
 
-![keybind menu](https://github.com/giabao141104/dotfiles/blob/master/dwm/2020-07-26_03-50-21_A.png)
-![keybind menu](https://github.com/giabao141104/dotfiles/blob/master/dwm/2020-07-26_03-41-53_R.png)
+![keybind menu](dotfiles/dwm/keybind.png)
+![keybind menu](dotfiles/dwm/keybind-full.png)
 ## statusbar
 My dwm statusbar. Font is [sourcecodepro](https://www.archlinux.org/packages/extra/any/adobe-source-code-pro-fonts/), emojis are from [awesome](https://www.archlinux.org/packages/community/any/awesome-terminal-fonts/)
 

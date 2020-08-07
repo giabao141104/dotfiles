@@ -11,7 +11,7 @@ My dwm statusbar. Font is [sourcecodepro](https://www.archlinux.org/packages/ext
 
 List of softwares: ```pacman pulseaudio pamixer speedtest-cli xorg-xsetroot coreutils```
 
-What it shows:
+What it displays:
 * Download/upload speed, recheck every 10 minutes
 * How much space is used in the root partition, package count
 * Pulseaudio volume

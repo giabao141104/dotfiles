@@ -1,0 +1,6 @@
+#!/bin/sh
+d=$(lsblk -lnp | grep -v "sda\|disk" | awk '{print $1, "("$4")", "mounted at "$7}')
+c=$(echo "$d" | dmenu -c -p " Unmount" -i -l 10 | awk '{print $1}')
+[ -z "$c" ] && exit
+[ ! -e "$c" ] && notify-send -i usbred -t 5000 "Filesystem not found" "Where the fork is "$c"" && exit
+doas umount "$c" ; if [ "$?" == "0" ]; then notify-send -i usb -t 5000  "Filesystem unmounted" ""$c""; else notify-send -i usbred -t 5000 "Filesystem can't be unmount" ""$c" is busy"; fi

@@ -1,0 +1,13 @@
+#!/bin/sh
+d=$(lsblk -lnp | grep 'part $' | awk '{print $1,"("$4")"}')
+c=$(echo "$d" | dmenu -c -p " Mount" -i -l 10 | awk '{print $1}')
+[ -z "$c" ] && exit
+cat /proc/mounts | grep $c ; [ "$?" == "0" ] && notify-send -i usb -t 5000 "Filesystem already mounted" "$c mounted at $(cat /proc/mounts | grep $c | awk '{print $2}')" && exit
+[ ! -e "$c" ] && notify-send -i usbred -t 5000 "Filesystem not found" "Where the fork is "$c"" && exit
+p=$(find /mnt -maxdepth 1 | dmenu -c -p " Mount point" -i -l 10)
+[ -z "$p" ] && exit
+[ ! -e "$p" ] && n=$(printf " No\n Yes" | dmenu -c -p " Create $p" -i -l 10)
+[ ! -e "$p" ] && [ -z "$n" ] && exit
+[ ! -e "$p" ] && [ "$n" == " No" ] && exit
+[ ! -e "$p" ] && [ "$n" == " Yes" ] && doas mkdir -p "$p"
+doas mount "$c" "$p" && notify-send -i usbgreen -t 5000  "Filesystem mounted" ""$c" at "$p""

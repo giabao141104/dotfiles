@@ -1,9 +1,18 @@
-# dwm
-## Keybind menu
-I made this using ```dunst libnotify```, script [here](https://github.com/giabao141104/dotfiles/blob/master/bin/key).
+# system
+## Mount/Unmount using dmenu
+I made all the icons myself! :)
 
-![keybind menu](https://github.com/giabao141104/dotfiles/blob/master/dwm/keybind.png)
-![keybind menu](https://github.com/giabao141104/dotfiles/blob/master/dwm/keybind-full.png)
+![mount](https://github.com/giabao141104/dotfiles/blob/master/image/dmenu_mount.jpg)
+![unmount](https://github.com/giabao141104/dotfiles/blob/master/image/dmenu_unmount.jpg)
+
+![mounted](https://github.com/giabao141104/dotfiles/blob/master/image/filesystem-mounted.png)
+![unmounted](https://github.com/giabao141104/dotfiles/blob/master/image/filesystem-unmounted.png)
+![notfound](https://github.com/giabao141104/dotfiles/blob/master/image/filesystem-notfound.png)
+## Power
+change systemd power state and lock using slock
+
+![power](https://github.com/giabao141104/dotfiles/blob/master/image/power.jpg)
+# dwm
 ## statusbar
 My dwm statusbar. Font is [sourcecodepro](https://www.archlinux.org/packages/extra/any/adobe-source-code-pro-fonts/), emojis are from [awesome](https://www.archlinux.org/packages/community/any/awesome-terminal-fonts/)
 
@@ -17,8 +26,9 @@ What it displays:
 * Pulseaudio volume
 * Time and date
 
-# Firefox
-## userChrome.css
+# Theme
+## Firefox
+### userChrome.css
 My modification of [dpcdpc11's Nord for Firefox](https://www.deviantart.com/dpcdpc11/art/Nord-for-Firefox-837860916).
 
 * Removed urlbar expansion
@@ -30,7 +40,22 @@ It's not finished yet, I'll work on it when I have time.
 
 ![userChrome.css](https://github.com/giabao141104/dotfiles/blob/master/firefox/2020-07-23_01-46-16_R.png)
 
+## Gimp
+nord theme
+![gimp](https://github.com/giabao141104/dotfiles/blob/master/image/gimp.png)
+
 # Extra
+## Keybind menu
+### Dunst
+Script [here](https://github.com/giabao141104/dotfiles/blob/master/bin/key). You'll have to set dunst's alignment to ```left```
+
+![dunst-key](https://github.com/giabao141104/dotfiles/blob/master/image/dunst-key.png)
+![dunst-key-full](https://github.com/giabao141104/dotfiles/blob/master/image/dunst-key-full.png)
+### dmenu
+![dmenu-key](https://github.com/giabao141104/dotfiles/blob/master/image/dmenu-key.jpg)
+![dmenu-key-full](https://github.com/giabao141104/dotfiles/blob/master/image/dmenu-key-full.jpg)
+
+
 ## prompt
 ### PS1
 ![ps1](https://github.com/giabao141104/dotfiles/blob/master/extra/prompt/2020-07-23_23-39-04_A.png)

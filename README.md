@@ -9,7 +9,7 @@ I made all the icons myself! :)
 ![unmounted](https://github.com/giabao141104/dotfiles/blob/master/image/filesystem-unmounted.png)
 ![notfound](https://github.com/giabao141104/dotfiles/blob/master/image/filesystem-notfound.png)
 ## Power
-change systemd power state and lock using slock
+change systemd power state and lock using [slock](https://tools.suckless.org/slock/)
 
 ![power](https://github.com/giabao141104/dotfiles/blob/master/image/power.jpg)
 # dwm

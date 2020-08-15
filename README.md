@@ -47,11 +47,12 @@ nord theme
 # Extra
 ## Keybind menu
 ### Dunst
-Script [here](https://github.com/giabao141104/dotfiles/blob/master/bin/key). You'll have to set dunst's alignment to ```left```
+Script [here](https://github.com/giabao141104/dotfiles/blob/master/bin/dmenu-key). You'll have to set dunst's alignment to ```left```.
 
 ![dunst-key](https://github.com/giabao141104/dotfiles/blob/master/image/dunst-key.png)
 ![dunst-key-full](https://github.com/giabao141104/dotfiles/blob/master/image/dunst-key-full.png)
 ### dmenu
+Just pipe the text [file](https://github.com/giabao141104/dotfiles/blob/master/bin/key) to dmenu.
 ![dmenu-key](https://github.com/giabao141104/dotfiles/blob/master/image/dmenu-key.jpg)
 ![dmenu-key-full](https://github.com/giabao141104/dotfiles/blob/master/image/dmenu-key-full.jpg)
 

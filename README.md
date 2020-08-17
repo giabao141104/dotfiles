@@ -1,3 +1,7 @@
+# Update
+Screenshot because I like this [unscii](http://pelulamu.net/unscii/) font
+![Update 17/8/2020](https://github.com/giabao141104/dotfiles/blob/master/image/unscii-1080p-update.png)
+
 # system
 ## Mount/Unmount using dmenu
 I made all the icons myself! :)

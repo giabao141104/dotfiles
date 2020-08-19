@@ -1,6 +1,6 @@
 # Update
-Screenshot because I like this [unscii](http://pelulamu.net/unscii/) font (and bought an 1080p monitor)
-![Update 17/8/2020](https://github.com/giabao141104/dotfiles/blob/master/image/unscii-1080p-update.png)
+Screenshot because I like this [unscii](http://pelulamu.net/unscii/) font (and just bought a 1080p monitor)
+![Update 19/08/2020](https://github.com/giabao141104/dotfiles/blob/master/image/unscii-1080p-update.png)
 
 # system
 ## Mount/Unmount using dmenu
@@ -78,6 +78,6 @@ I modified [SSStormy's mpd-rich-presence-discord](https://github.com/SSStormy/mp
 1. Dependencies ```discord-rpc libmpdclient```
 2. Make an [application](https://discord.com/developers/applications)
 3. Upload the 3 buttons in the ```mpd-rich-presence-discord/assets/discord/png/``` to Art Assets under the Rich Presence tab. Rename them to ```pause-circle_png play-circle_png refresh-cw_png``` respectively
-4. Find a good image and upload it to Art Assets, rename it to ```mpd_large```
+4. Find a good image and upload it to Art Assets, rename to ```mpd_large```
 5. Change all the AppId in ```mpd-rich-presence-discord/src/main.cpp``` to the one you just made
 6. Run build.sh and the executable file should be in ```mpd-rich-presence-discord/release```

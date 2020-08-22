@@ -1,26 +1,26 @@
 # Update
 Screenshot because I like this [unscii](http://pelulamu.net/unscii/) font (and just bought a 1080p monitor)
-![Update 19/08/2020](https://github.com/giabao141104/dotfiles/blob/master/image/unscii-1080p-update.png)
+![Update 19/08/2020](image/unscii-1080p-update.png)
 
 # system
 ## Mount/Unmount using dmenu
 I made all the icons myself! :)
 
-![mount](https://github.com/giabao141104/dotfiles/blob/master/image/dmenu_mount.jpg)
-![unmount](https://github.com/giabao141104/dotfiles/blob/master/image/dmenu_unmount.jpg)
+![mount](image/dmenu_mount.jpg)
+![unmount](image/dmenu_unmount.jpg)
 
-![mounted](https://github.com/giabao141104/dotfiles/blob/master/image/filesystem-mounted.png)
-![unmounted](https://github.com/giabao141104/dotfiles/blob/master/image/filesystem-unmounted.png)
-![notfound](https://github.com/giabao141104/dotfiles/blob/master/image/filesystem-notfound.png)
+![mounted](image/filesystem-mounted.png)
+![unmounted](image/filesystem-unmounted.png)
+![notfound](image/filesystem-notfound.png)
 ## Power
 change systemd power state and lock using [slock](https://tools.suckless.org/slock/)
 
-![power](https://github.com/giabao141104/dotfiles/blob/master/image/power.jpg)
+![power](image/power.jpg)
 # dwm
 ## statusbar
 My dwm statusbar. Font is [sourcecodepro](https://www.archlinux.org/packages/extra/any/adobe-source-code-pro-fonts/), emojis are from [awesome](https://www.archlinux.org/packages/community/any/awesome-terminal-fonts/)
 
-![statusbar](https://github.com/giabao141104/dotfiles/blob/master/dwm/statusbar.png)
+![statusbar](dwm/statusbar.png)
 
 List of softwares: ```pacman pulseaudio pamixer speedtest-cli xorg-xsetroot coreutils```
 
@@ -41,7 +41,7 @@ My modification of [dpcdpc11's Nord for Firefox](https://www.deviantart.com/dpcd
 * Changed tabs' colors
 
 It's not finished yet, I'll work on it when I have time.
-![userChrome.css](https://github.com/giabao141104/dotfiles/blob/master/firefox/2020-07-23_01-46-16_R.png)
+![userChrome.css](firefox/2020-07-23_01-46-16_R.png)
 ### stylus
 #### Wikipedia
 [udscbt's stylesheets](https://github.com/udscbt-wsx/udscbt-userstyles) for wikipedia with nord theme!
@@ -51,33 +51,33 @@ It's not finished yet, I'll work on it when I have time.
 
 ## Gimp
 nord theme
-![gimp](https://github.com/giabao141104/dotfiles/blob/master/image/gimp.png)
+![gimp](image/gimp.png)
 
 # Extra
 ## Keybind menu
 ### Dunst
-Script [here](https://github.com/giabao141104/dotfiles/blob/master/bin/dunst-key). You'll have to set dunst's alignment to ```left```.
+Script [here](bin/dunst-key). You'll have to set dunst's alignment to ```left```.
 
-![dunst-key](https://github.com/giabao141104/dotfiles/blob/master/image/dunst-key.png)
-![dunst-key-full](https://github.com/giabao141104/dotfiles/blob/master/image/dunst-key-full.png)
+![dunst-key](image/dunst-key.png)
+![dunst-key-full](image/dunst-key-full.png)
 ### dmenu
-Just pipe the text [file](https://github.com/giabao141104/dotfiles/blob/master/bin/key) to dmenu.
+Just pipe the text [file](bin/key) to dmenu.
 
-![dmenu-key](https://github.com/giabao141104/dotfiles/blob/master/image/dmenu-key.jpg)
-![dmenu-key-full](https://github.com/giabao141104/dotfiles/blob/master/image/dmenu-key-full.jpg)
+![dmenu-key](image/dmenu-key.jpg)
+![dmenu-key-full](image/dmenu-key-full.jpg)
 
 
 ## prompt
 ### PS1
-![ps1](https://github.com/giabao141104/dotfiles/blob/master/extra/prompt/2020-07-23_23-39-04_A.png)
+![ps1](extra/prompt/2020-07-23_23-39-04_A.png)
 
 It display different kaomoji depending on if the command succeeds or fails
 
-![logic](https://github.com/giabao141104/dotfiles/blob/master/extra/prompt/2020-07-23_23-38-43_A.png)
+![logic](extra/prompt/2020-07-23_23-38-43_A.png)
 ### PS2
-![ps2](https://github.com/giabao141104/dotfiles/blob/master/extra/prompt/2020-07-23_23-38-55_A.png)
+![ps2](extra/prompt/2020-07-23_23-38-55_A.png)
 ## Discord mpd rich presence (mpd-pumpko)
-![mpd rich presence](https://github.com/giabao141104/dotfiles/blob/master/mpd-rich-presence-discord/2020-07-31_04-18-12_A.png)
+![mpd rich presence](mpd-rich-presence-discord/2020-07-31_04-18-12_A.png)
 
 I modified [SSStormy's mpd-rich-presence-discord](https://github.com/SSStormy/mpd-rich-presence-discord) to change the large image. Here's how you can do it too!
 1. Dependencies ```discord-rpc libmpdclient```

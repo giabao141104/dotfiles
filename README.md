@@ -41,8 +41,13 @@ My modification of [dpcdpc11's Nord for Firefox](https://www.deviantart.com/dpcd
 * Changed tabs' colors
 
 It's not finished yet, I'll work on it when I have time.
-
 ![userChrome.css](https://github.com/giabao141104/dotfiles/blob/master/firefox/2020-07-23_01-46-16_R.png)
+### stylus
+#### Wikipedia
+[udscbt's stylesheets](https://github.com/udscbt-wsx/udscbt-userstyles) for wikipedia with nord theme!
+
+![wikipedia-main](firefox/stylus/wikipedia-main.png)
+![wikipedia-article](firefox/stylus/wikipedia-article.png)
 
 ## Gimp
 nord theme

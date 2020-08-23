@@ -44,7 +44,7 @@ It's not finished yet, I'll work on it when I have time.
 ![userChrome.css](firefox/2020-07-23_01-46-16_R.png)
 ### stylus
 #### Wikipedia
-[udscbt](https://github.com/udscbt-wsx/udscbt-userstyles) inspired stylesheet for wikipedia with nord theme! Stilling working on this
+[udscbt](https://github.com/udscbt-wsx/udscbt-userstyles) inspired stylesheet for wikipedia with nord theme! Still working on this.
 
 ![wikipedia-article](firefox/stylus/wikipedia-article.png)
 

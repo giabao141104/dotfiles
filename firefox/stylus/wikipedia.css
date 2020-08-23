@@ -1,0 +1,139 @@
+@-moz-document domain("wikipedia.org") {
+* {
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* GENERAL */
+html {
+    background: #2e3440 !important;
+}
+body {
+    background: #2e3440 !important;
+}
+
+a {
+    color: #81a1c1 !important;
+}
+a:visited, .selected {
+    color: #b48ead !important;
+    text-decoration: none !important;
+}
+label {
+    color: #bf616a !important;
+}
+
+/* NAVBAR */
+.toc, .thumbinner {
+    border-radius: 5px !important;
+    background: #2e3440 !important;
+}
+#p-navigation {
+    background: #5e81ac !important;
+}
+#p-interaction-label, #p-tb-label, #p-coll-print_export-label, #p-wikibase-otherprojects-label, #p-lang-label {
+    color: #d8dee9 !important;
+    background: #3b4252 !important;
+    background-image: none !important;
+    padding: 5px !important;
+    border-radius: 5px !important;
+}
+
+/* MAIN */
+#mw-head {
+    color: #eceff4 !important;
+    background: #5e81ac !important;
+}
+#mw-head-base {
+    margin-left: 0;
+    background: #5e81ac;
+    box-shadow: 0 140px 0 105px #5e81ac !important;
+}
+
+.mwe-popups {
+    background: #3b4252 !important;
+    border-radius: 5px !important;
+    border: 5px solid #81a1c1 !important;
+}
+.mwe-popups-is-not-tall {
+    border-radius: 5px !important;
+}
+.mw-ui-icon {
+    background: none !important;
+    background-image: none !important;
+}
+    /*Search*/
+#searchInput {
+    color: #eceff4 !important;
+}
+.suggestions-result, .special-query {
+    color: #eceff4 !important;
+    background: #5e81ac !important;
+}
+.suggestions-special {
+    background: #5e81ac !important;
+    border-radius: 0px 0px 5px 5px;
+}
+.suggestions-result:hover {
+    background: #81a1c1 !important;
+}
+.special-query:hover {
+    padding-left: 5px;
+    border-radius: 0px 0px 5px 5px !important;
+}
+.special-label {
+    color: #2e3440 !important;
+}
+
+    /*Header*/
+.vector-menu-content-list a:visited, .vector-menu-content-list a {
+    color: #eceff4 !important;
+    text-decoration: none !important;
+}
+#p-namespaces, #p-views, .vector-menu-tabs a,
+#ca-nstab-main, #ca-talk, #ca-view, #ca-edit, #ca-history, #ca-watch {
+    background: #5e81ac !important;
+    background-image: none !important;
+}
+    /*Article*/
+.mw-body-content, p {
+    color: #eceff4 !important;
+    background: #3b4252 !important;
+}
+.mw-body {
+    color: #eceff4 !important;
+    background: #3b4252 !important;
+    border-radius: 15px !important;
+    overflow: visible !important;
+    margin-right: 10px !important;
+}
+.mw-headline, #mw-toc-heading, .fn {
+    color: #eceff4 !important;
+    background: #3b4252 !important;
+    padding: 5px;
+    border-radius: 5px;    
+}
+.firstHeading, .noprint, .hatnote, .thumbcation, .tocnumber {
+    color: #eceff4 !important;
+    background: none !important;
+    border-radius: 5px !important;
+}
+
+table {
+    background: #2e3440 !important;
+    padding: 5px !important;
+    border-radius: 5px !important;
+}
+th, td {
+    color: #eceff4 !important;
+}
+
+img {
+    border-radius: 5px !important;
+}
+pre, code, .mwe-math-fallback-image-inline {
+    background: #d1cbbf;
+    border-radius: 4px;
+    filter: invert(100%);
+}
+}

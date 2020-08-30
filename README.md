@@ -18,11 +18,11 @@ change systemd power state and lock using [slock](https://tools.suckless.org/slo
 ![power](image/power.jpg)
 # dwm
 ## statusbar
-My dwm statusbar. Font is [sourcecodepro](https://www.archlinux.org/packages/extra/any/adobe-source-code-pro-fonts/), emojis are from [awesome](https://www.archlinux.org/packages/community/any/awesome-terminal-fonts/)
+My dwm statusbar. Font is [unscii](http://pelulamu.net/unscii/).
 
 ![statusbar](dwm/statusbar.png)
 
-List of softwares: ```pacman pulseaudio pamixer speedtest-cli xorg-xsetroot coreutils```
+Dependency: ```pacman pulseaudio pamixer speedtest-cli xorg-xsetroot coreutils```
 
 What it displays:
 * Download/upload speed, recheck every 10 minutes
@@ -41,7 +41,7 @@ My modification of [dpcdpc11's Nord for Firefox](https://www.deviantart.com/dpcd
 * Changed tabs' colors
 
 It's not finished yet, I'll work on it when I have time.
-![userChrome.css](firefox/2020-07-23_01-46-16_R.png)
+![userChrome](firefox/userChrome.png)
 ### stylus
 #### Wikipedia
 [udscbt](https://github.com/udscbt-wsx/udscbt-userstyles) inspired stylesheet for wikipedia with nord theme! Still working on this.
@@ -54,12 +54,6 @@ nord theme
 
 # Extra
 ## Keybind menu
-### Dunst
-Script [here](bin/dunst-key). You'll have to set dunst's alignment to ```left```.
-
-![dunst-key](image/dunst-key.png)
-![dunst-key-full](image/dunst-key-full.png)
-### dmenu
 Just pipe the text [file](bin/key) to dmenu.
 
 ![dmenu-key](image/dmenu-key.jpg)
@@ -68,18 +62,18 @@ Just pipe the text [file](bin/key) to dmenu.
 
 ## prompt
 ### PS1
-![ps1](extra/prompt/2020-07-23_23-39-04_A.png)
+![PS1](extra/prompt/PS1.png)
 
 It display different kaomoji depending on if the command succeeds or fails
 
-![logic](extra/prompt/2020-07-23_23-38-43_A.png)
+![PS1-logic](extra/prompt/PS1-logic.png)
 ### PS2
-![ps2](extra/prompt/2020-07-23_23-38-55_A.png)
+![PS2](extra/prompt/PS2.png)
 ## Discord mpd rich presence (mpd-pumpko)
 ![mpd rich presence](mpd-rich-presence-discord/2020-07-31_04-18-12_A.png)
 
 I modified [SSStormy's mpd-rich-presence-discord](https://github.com/SSStormy/mpd-rich-presence-discord) to change the large image. Here's how you can do it too!
-1. Dependencies ```discord-rpc libmpdclient```
+1. Dependencies: ```discord-rpc libmpdclient```
 2. Make an [application](https://discord.com/developers/applications)
 3. Upload the 3 buttons in the ```mpd-rich-presence-discord/assets/discord/png/``` to Art Assets under the Rich Presence tab. Rename them to ```pause-circle_png play-circle_png refresh-cw_png``` respectively
 4. Find a good image and upload it to Art Assets, rename to ```mpd_large```

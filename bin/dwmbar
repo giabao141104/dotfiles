@@ -1,8 +1,41 @@
 #!/bin/sh
-#   
-# 
-# 
-while true; do
-xsetroot -name "$(echo $(echo $(echo "" ; cat ~/document/speedtest-result | awk '{print $5}') ; echo $(echo "" ; cat ~/document/speedtest-result | awk '{print $8}') ; echo "" ; echo $(df -H --block-size M /dev/sda3 | tail -1 | awk '{print $3}' ; echo "" ; pacman -Q | wc -l) ; echo "" ; pamixer --get-volume-human ; date +" %H:%M  %d/%m/%Y"))"
-sleep 1m
+dwm_speed () {
+  echo "[ Down"
+  cat ~/document/speedtest-result | awk '{print $5}';
+  echo "Up";
+  cat ~/document/speedtest-result | awk '{print $8}';
+  echo "]";}
+dwm_root () {
+  echo "[ Root";
+  df -H --block-size M /dev/sda3 | tail -1 | awk '{print $3}';
+  echo "]";}
+dwm_package () {
+  echo "[ Package";
+  pacman -Q | wc -l;
+  echo "]";}
+dwm_audio () {
+  echo "[ Audio";
+  pamixer --get-volume-human;
+  echo "]";}
+dwm_timedate () {
+  date +"[ Time %H:%M Date %d/%m/%Y ]";}
+
+  #statusalt=""
+  #statusalt="$statusalt$(echo $speed)"
+  #statusalt="$statusalt $(echo $root)"
+  #statusalt="$statusalt $(echo $package)"
+  #statusalt="$statusalt $(echo $audio)"
+  #statusalt="$statusalt $(echo $timedate)"
+
+while true
+  do
+    status=""
+    status="$status$(dwm_speed)"
+    status="$status$(dwm_root)"
+    status="$status$(dwm_package)"
+    status="$status$(dwm_audio)"
+    status="$status$(dwm_timedate)"
+
+    xsetroot -name "$(echo $status)"
+    sleep 1m
 done

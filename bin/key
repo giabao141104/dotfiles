@@ -22,13 +22,15 @@
  Mod+Shift+Left   [Resize] -w       
  Mod+Shift+Right  [Resize] +w       
 ┣━ LAUNCHER ━━━━━━━━━━━━━━━━━━━━━━━━━┫
- Mod+p            dmenu             
- Mod+t            terminal          
- Mod+m            ncmpcpp           
  Mod+a            pulsemixer        
- Mod+r            newsboat          
  Mod+c            calcurse          
+ Mod+d            StarDict               
  Mod+f            nnn               
+ Mod+m            ncmpcpp           
+ Mod+p            dmenu             
+ Mod+r            newsboat          
+ Mod+t            terminal          
+ Mod+w            Bookmark
 ┣━ UTILITY ━━━━━━━━━━━━━━━━━━━━━━━━━━┫
  Mod+F1           Mount filesystem  
  Mod+Shift+F1     Unmount filesystem 

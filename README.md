@@ -1,5 +1,5 @@
 # Update
-Screenshot because I like this [unscii](http://pelulamu.net/unscii/) font (and just bought a 1080p monitor)
+Screenshot because I like this [unscii](http://pelulamu.net/unscii/) font! 
 ![Update 19/08/2020](image/unscii-1080p-update.png)
 
 # system
@@ -22,7 +22,7 @@ My dwm statusbar. Font is [unscii](http://pelulamu.net/unscii/).
 
 ![statusbar](dwm/statusbar.png)
 
-Dependency: ```pacman pulseaudio pamixer speedtest-cli xorg-xsetroot coreutils```
+Dependencies: ```pacman pulseaudio pamixer speedtest-cli xorg-xsetroot coreutils```
 
 What it displays:
 * Download/upload speed, recheck every 10 minutes

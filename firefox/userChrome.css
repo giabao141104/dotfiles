@@ -24,6 +24,8 @@ ENJOY!
 	--aurora_color3: #EBCB8B;
 	--aurora_color4: #A3BE8C;
 	--aurora_color5: #B48EAD;
+        
+        font-family: unscii !important;
 }
 
 /*================ LIGHT THEME ================*/
@@ -226,6 +228,7 @@ toolbar#nav-bar toolbarbutton #fxa-avatar-image {
 #urlbar > #urlbar-input-container {
 	border-radius: 14px !important;
 	color: var(--frost_color3) !important;
+        padding: 0px !important;
 }
 #PersonalToolbar .toolbarbutton-1:not([disabled="true"]):not([checked]):not([open]):not(:active):hover, .tabbrowser-arrowscrollbox:not([scrolledtostart="true"])::part(scrollbutton-up):hover, .tabbrowser-arrowscrollbox:not([scrolledtoend="true"])::part(scrollbutton-down):hover, .findbar-button:not(:-moz-any([checked="true"], [disabled="true"])):hover, toolbarbutton.bookmark-item:not(.subviewbutton):hover:not([disabled="true"]):not([open]), toolbar .toolbarbutton-1:not([disabled="true"]):not([checked]):not([open]):not(:active):hover > .toolbarbutton-icon, toolbar .toolbarbutton-1:not([disabled="true"]):not([checked]):not([open]):not(:active):hover > .toolbarbutton-text, toolbar .toolbarbutton-1:not([disabled="true"]):not([checked]):not([open]):not(:active):hover > .toolbarbutton-badge-stack {
 	background: var(--night_color2) !important;
@@ -241,6 +244,7 @@ toolbar#nav-bar toolbarbutton #fxa-avatar-image {
 
 #urlbar {
 	color: var(--frost_color3) !important;
+        padding-bottom: 1px !important;
 }
 .urlbarView-url {
 	color: var(--snow_color1) !important;
@@ -500,97 +504,28 @@ tooltip {
 	padding: 6.5px !important;
 }
 
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"); /* only needed once */
 
-/*** Megabar Styler General - version 2020-04-19 ***/
-  /*** General Preferences ***/
-  :root {
-    /* Number of pixels of enlargement when URL bar is focused */
-    --mbarstyler-popout-pixels: 0px; /* [0px - 7px] */
-    /* Top Bar Display or Not */
-    --mbarstyler-top-bar-display: none; /* [block,none] */
-    /* Font sizes (default: 13.8px for title, 10.2px for URL) */
-    --mbarstyler-title-font-size: 15px; /* [13px - 18px] */
-    --mbarstyler-url-font-size: 13px; /* [12px - 16px] */
-    /* Rows to show without scrolling */
-    --mbarstyler-max-rows-without-scrolling: 8;
-    /* Bottom border for each result row */
-    --mbarstyler-bottom-border-width: 0px; /* [0px or 1px] */
-    /* Match display style */
-    --mbarstyler-match-weight: 700; /* [400,700] */
-    --mbarstyler-match-background-opacity: 0.0; /* [0.0,0.05,0.1] */
-  }
-  /*** URL bar enlargement or lack thereof ***/
-  /* Compute new position, width, and padding */
-  #urlbar[breakout][breakout-extend] {
-    top: calc(7px - var(--mbarstyler-popout-pixels)) !important;
-    left: calc(0px - var(--mbarstyler-popout-pixels)) !important;
-    width: calc(100% + (2 * var(--mbarstyler-popout-pixels))) !important;
-    padding: var(--mbarstyler-popout-pixels) !important;
-  }
-  [uidensity="compact"] #urlbar[breakout][breakout-extend] {
-    top: calc(6px - var(--mbarstyler-popout-pixels)) !important;
-  }
-  [uidensity="touch"] #urlbar[breakout][breakout-extend] {
-    top: calc(5px - var(--mbarstyler-popout-pixels)) !important;
-  }
-  /* Prevent shift of URL bar contents */
-  #urlbar[breakout][breakout-extend] > #urlbar-input-container {
-    height: var(--urlbar-height) !important;
-    padding: 0 !important;
-  }
-  /* Do not animate */
-  #urlbar[breakout][breakout-extend] > #urlbar-background {
-    animation: none !important;;
-  }
-  /* Remove shadows */
-  #urlbar[breakout][breakout-extend] > #urlbar-background {
-    box-shadow: none !important;
-  }
-  /*** Top "Blue Bar" Display ***/
-  .urlbarView-row:first-of-type {
-    display: var(--mbarstyler-top-bar-display) !important;
-  }
-  /*** Font Sizes and Scrolling ***/
-  /* Title font-size */
-  .urlbarView-row .urlbarView-title {
-    font-size: var(--mbarstyler-title-font-size) !important;
-  }
-  /* URL / action font-size */
-  .urlbarView-row .urlbarView-secondary,
-  .urlbarView-row .urlbarView-url,
-  .urlbarView-row .urlbarView-action {
-    font-size: var(--mbarstyler-url-font-size) !important;
-  }
-  /* Set max-height for items visible without scrolling */
-  #urlbarView-results, #urlbar-results {
-    height: unset !important;
-    max-height: calc(2.5 * (var(--mbarstyler-title-font-size) + var(--mbarstyler-bottom-border-width)) * var(--mbarstyler-max-rows-without-scrolling)) !important;
-  }
-  #urlbar-results {
-    overflow-y: auto !important; 
-  }
-  /* Clean up extra spacing at the top and bottom */  
-  #urlbar-results {
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
-  }
-  /* Subtle border between results */
-  .urlbarView-row:not(:last-of-type) {
-    border-bottom: var(--mbarstyler-bottom-border-width) solid rgba(0, 0, 0, 0.1) !important;
-  }
-  /* Match Styling Like Fx43-47 */
-  [lwt-popup-darktext] .urlbarView-row:not([selected]) .urlbarView-title strong,
-  [lwt-popup-darktext] .urlbarView-row:not([selected]) .urlbarView-url strong {
-    font-weight: var(--mbarstyler-match-weight) !important;
-    box-shadow: inset 0 0 1px 1px rgba(0, 0, 0, calc(var(--mbarstyler-match-background-opacity) * 2));
-    background-color: rgba(0, 0, 0, var(--mbarstyler-match-background-opacity));
-    border-radius: 14px;
-  }
-  [lwt-popup-brighttext] .urlbarView-row:not([selected]) .urlbarView-title strong,
-  [lwt-popup-brighttext] .urlbarView-row:not([selected]) .urlbarView-url strong {
-    font-weight: var(--mbarstyler-match-weight) !important;
-    box-shadow: inset 0 0 1px 1px rgba(255, 255, 255, calc(var(--mbarstyler-match-background-opacity) * 2));
-    background-color: rgba(255, 255, 255, var(--mbarstyler-match-background-opacity));
-    border-radius: 14px;
-  }
-/*** End of: Megabar Styler General ***/
+#urlbar[breakout],
+#urlbar[breakout][breakout-extend] {
+  --urlbar-height: 25px !important;
+  --urlbar-toolbar-height: 30px !important;
+  margin-top: 1.5px !important;
+  width: 100% !important;
+  top: calc((var(--urlbar-toolbar-height) - var(--urlbar-height)) / 2) !important;
+  left: 0 !important;
+}
+
+#urlbar[breakout][breakout-extend] > #urlbar-input-container,
+#urlbar-input-container {
+  height: var(--urlbar-height) !important;
+  width: 100% !important;
+  padding-block: unset !important;
+  padding-inline: unset !important;
+  transition: none !important;
+}
+
+#urlbar[breakout][breakout-extend] > #urlbar-background {
+  box-shadow: 0 0px 0px rgba(0,0,0,.05) !important;
+  animation: none !important;
+}

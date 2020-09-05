@@ -1,0 +1,32 @@
+#!/bin/sh
+m="\
+    Menu    
+ Dotfile  
+ Power    
+ Mount    
+ Unmount  "
+c=$(echo -e "$m" | dmenu -c -i -l 10)
+[ -z "$c" ] && exit
+d="\
+dwm
+dmenu
+st
+tabbed
+slock
+picom
+init.vim"
+case $c in
+  " Dotfile  ") s=$(echo -e "$d" | dmenu -c -i -l 10) && \
+    case $s in
+      dwm) st -c termapp -g 100x25 -e nvim /usr/src/dwm-6.2/config.h ;;
+      dmenu) st -c termapp -g 100x25 -e nvim /usr/src/dmenu-4.9/config.h ;;
+      st) st -c termapp -g 100x25 -e nvim /usr/src/st-0.8.4/config.h ;;
+      tabbed) st -c termapp -g 100x25 -e nvim /usr/src/tabbed-0.6/config.h ;;
+      slock) st -c termapp -g 100x25 -e nvim /usr/src/slock-1.4/config.h ;;
+      picom) st -c termapp -g 100x25 -e nvim ~/.config/picom.conf ;;
+      init.vim) st -c termapp -g 100x25 -e nvim ~/.config/nvim/init.vim ;;
+    esac;;
+  " Power    ") power;;
+  " Mount    ") dmenu_mount;;
+  " Unmount  ") dmenu_umount;;
+esac

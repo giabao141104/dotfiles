@@ -1,0 +1,2 @@
+#!/bin/sh
+c=$(gpick -s -o) ; echo $c | tr -d '\n' | xclip && notify-send -t 5000 "Copied color to clipboard" "$c"

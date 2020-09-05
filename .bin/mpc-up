@@ -1,0 +1,3 @@
+#!/bin/sh
+mpc volume +1
+notify-send -i volup -t 500 -h string:x-canonical-private-synchronous:mpdvolume "Mpd Volume" "$(mpc | tail -1 | awk '{printf $2}')"

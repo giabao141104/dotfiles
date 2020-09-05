@@ -41,6 +41,7 @@ static const Layout layouts[] = {
 	{ "[]=",      tile },    /* first entry is default */
 	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ "[M]",      monocle },
+        { "[D]",      deck }, /*deck*/
 };
 
 /* key definitions */
@@ -59,6 +60,8 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
 
+#include "movestack.c"
+#include "shiftview.c"
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
@@ -68,6 +71,10 @@ static Key keys[] = {
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
 	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
+        { MODKEY|ShiftMask,             XK_j,      movestack,      {.i = +1 } }, /*movestack*/
+        { MODKEY|ShiftMask,             XK_k,      movestack,      {.i = -1 } }, /*movestack*/
+        { MODKEY|ShiftMask,             XK_l,      shiftview,      {.i = +1 } }, /*shiftview*/
+        { MODKEY|ShiftMask,             XK_h,      shiftview,      {.i = -1 } }, /*shiftview*/
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY,                       XK_Return, zoom,           {0} },
@@ -76,7 +83,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
-	{ MODKEY,                       XK_space,  setlayout,      {0} },
+        { MODKEY,                       XK_c,      setlayout,      {.v = &layouts[3]} }, /*deck*/
+        { MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
         { MODKEY,                       XK_Down,   moveresize,     {.v = "0x 25y 0w 0h" } },
         { MODKEY,                       XK_Up,     moveresize,     {.v = "0x -25y 0w 0h" } },

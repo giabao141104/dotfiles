@@ -49,7 +49,8 @@
 #define CLEANMASK(mask)         (mask & ~(numlockmask|LockMask) & (ShiftMask|ControlMask|Mod1Mask|Mod2Mask|Mod3Mask|Mod4Mask|Mod5Mask))
 #define INTERSECT(x,y,w,h,m)    (MAX(0, MIN((x)+(w),(m)->wx+(m)->ww) - MAX((x),(m)->wx)) \
                                * MAX(0, MIN((y)+(h),(m)->wy+(m)->wh) - MAX((y),(m)->wy)))
-#define ISVISIBLE(C)            ((C->tags & C->mon->tagset[C->mon->seltags]))
+#define ISVISIBLEONTAG(C, T)    ((C->tags & T)) /*attach aside*/
+#define ISVISIBLE(C)            ISVISIBLEONTAG(C, C->mon->tagset[C->mon->seltags]) /*attach aside*/
 #define LENGTH(X)               (sizeof X / sizeof X[0])
 #define MOUSEMASK               (BUTTONMASK|PointerMotionMask)
 #define WIDTH(X)                ((X)->w + 2 * (X)->bw)
@@ -92,7 +93,7 @@ struct Client {
 	int basew, baseh, incw, inch, maxw, maxh, minw, minh;
 	int bw, oldbw;
 	unsigned int tags;
-	int isfixed, iscentered, isfloating, isurgent, neverfocus, oldstate, isfullscreen; /*center*/
+	int isfixed, iscentered, isfloating, isurgent, neverfocus, oldstate, isfullscreen, isfakefullscreen; /*center*/ /*fakefullscreen*/
 	Client *next;
 	Client *snext;
 	Monitor *mon;
@@ -139,6 +140,7 @@ typedef struct {
 	unsigned int tags;
 	int iscentered; /*center*/
 	int isfloating;
+        int isfakefullscreen; /*fakefullscreen*/
 	int monitor;
 } Rule;
 
@@ -148,6 +150,7 @@ static int applysizehints(Client *c, int *x, int *y, int *w, int *h, int interac
 static void arrange(Monitor *m);
 static void arrangemon(Monitor *m);
 static void attach(Client *c);
+static void attachaside(Client *c); /*attach aside*/
 static void attachstack(Client *c);
 static void buttonpress(XEvent *e);
 static void checkotherwm(void);
@@ -158,6 +161,7 @@ static void configure(Client *c);
 static void configurenotify(XEvent *e);
 static void configurerequest(XEvent *e);
 static Monitor *createmon(void);
+static void deck(Monitor *m); /*deck*/
 static void destroynotify(XEvent *e);
 static void detach(Client *c);
 static void detachstack(Client *c);
@@ -185,6 +189,7 @@ static void monocle(Monitor *m);
 static void motionnotify(XEvent *e);
 static void moveresize(const Arg *arg); /*moveresize*/
 static void movemouse(const Arg *arg);
+static Client *nexttagged(Client *c); /*attach aside*/
 static Client *nexttiled(Client *c);
 static void pop(Client *);
 static void propertynotify(XEvent *e);
@@ -302,6 +307,7 @@ applyrules(Client *c)
 		{
 			c->iscentered = r->iscentered; /*center*/
 			c->isfloating = r->isfloating;
+                        c->isfakefullscreen = r->isfakefullscreen; /*fakefullscreen*/
 			c->tags |= r->tags;
 			for (m = mons; m && m->num != r->monitor; m = m->next);
 			if (m)
@@ -409,6 +415,19 @@ attach(Client *c)
 	c->next = c->mon->clients;
 	c->mon->clients = c;
 }
+
+/*attach aside*/
+void
+attachaside(Client *c) {
+       Client *at = nexttagged(c);
+       if(!at) {
+               attach(c);
+               return;
+               }
+       c->next = at->next;
+       at->next = c;
+}
+/*attach aside*/
 
 void
 attachstack(Client *c)
@@ -525,7 +544,9 @@ clientmessage(XEvent *e)
 		if (cme->data.l[1] == netatom[NetWMFullscreen]
 		|| cme->data.l[2] == netatom[NetWMFullscreen])
 			setfullscreen(c, (cme->data.l[0] == 1 /* _NET_WM_STATE_ADD    */
-				|| (cme->data.l[0] == 2 /* _NET_WM_STATE_TOGGLE */ && !c->isfullscreen)));
+                                        /*fakefullscreen*/
+                                        || (cme->data.l[0] == 2 /* _NET_WM_STATE_TOGGLE */
+                                         && (!c->isfullscreen || c->isfakefullscreen))));
 	} else if (cme->message_type == netatom[NetActiveWindow]) {
 		if (c != selmon->sel && !c->isurgent)
 			seturgent(c, 1);
@@ -568,8 +589,10 @@ configurenotify(XEvent *e)
 			drw_resize(drw, sw, bh);
 			updatebars();
 			for (m = mons; m; m = m->next) {
-				for (c = m->clients; c; c = c->next)
-					if (c->isfullscreen)
+                                for (c = m->clients; c; c = c->next)
+                                        /*fakefullscreen*/
+                                        if (c->isfullscreen
+                                         &&  !c->isfakefullscreen)                                        
 						resizeclient(c, m->mx, m->my, m->mw, m->mh);
 				XMoveResizeWindow(dpy, m->barwin, m->wx, m->by, m->ww, bh);
 			}
@@ -658,6 +681,33 @@ destroynotify(XEvent *e)
 		unmanage(c, 1);
 }
 
+/*deck*/
+void
+deck(Monitor *m) {
+       unsigned int i, n, h, mw, my;
+       Client *c;
+
+       for(n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
+       if(n == 0)
+               return;
+
+       if(n > m->nmaster) {
+               mw = m->nmaster ? m->ww * m->mfact : 0;
+               snprintf(m->ltsymbol, sizeof m->ltsymbol, "[%d]", n - m->nmaster);
+       }
+       else
+               mw = m->ww;
+       for(i = my = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
+               if(i < m->nmaster) {
+                       h = (m->wh - my) / (MIN(n, m->nmaster) - i);
+                       resize(c, m->wx, m->wy + my, mw - (2*c->bw), h - (2*c->bw), False);
+                       my += HEIGHT(c);
+               }
+               else
+                       resize(c, m->wx + mw, m->wy, m->ww - mw - (2*c->bw), m->wh - (2*c->bw), False);
+}
+/*deck*/
+
 void
 detach(Client *c)
 {
@@ -723,10 +773,11 @@ drawbar(Monitor *m)
 		drw_setscheme(drw, scheme[m->tagset[m->seltags] & 1 << i ? SchemeSel : SchemeNorm]);
 		drw_text(drw, x, 0, w, bh, lrpad / 2, tags[i], urg & 1 << i);
 		if (occ & 1 << i)
-			drw_rect(drw, x + boxs, boxs, boxw, boxw,
-				m == selmon && selmon->sel && selmon->sel->tags & 1 << i,
-				urg & 1 << i);
-		x += w;
+                        drw_rect(drw, x + boxs, boxs, boxw, boxw,
+                      /*drw_rect(drw, x + boxw, 0, w - ( 2 * boxw + 1 ), boxw - 3,*/
+			        m == selmon && selmon->sel && selmon->sel->tags & 1 << i,
+			        urg & 1 << i);
+                x += w;
 	}
 	w = blw = TEXTW(m->ltsymbol);
 	drw_setscheme(drw, scheme[SchemeNorm]);
@@ -735,8 +786,8 @@ drawbar(Monitor *m)
 	if ((w = m->ww - sw - x) > bh) {
 		if (m->sel) {
 			drw_setscheme(drw, scheme[m == selmon ? SchemeSel : SchemeNorm]);
-			drw_text(drw, x, 0, w, bh, lrpad / 2, m->sel->name, 0);
-			if (m->sel->isfloating)
+                        drw_text(drw, x, 0, w, bh, lrpad / 2, m->sel->name, 0);
+                        if (m->sel->isfloating)
 				drw_rect(drw, x + boxs, boxs, boxw, boxw, m->sel->isfixed, 0);
 		} else {
 			drw_setscheme(drw, scheme[SchemeNorm]);
@@ -1070,7 +1121,7 @@ manage(Window w, XWindowAttributes *wa)
 		c->isfloating = c->oldstate = trans != None || c->isfixed;
 	if (c->isfloating)
 		XRaiseWindow(dpy, c->win);
-	attach(c);
+	attachaside(c); /*attach aside*/
 	attachstack(c);
 	XChangeProperty(dpy, root, netatom[NetClientList], XA_WINDOW, 32, PropModeAppend,
 		(unsigned char *) &(c->win), 1);
@@ -1151,7 +1202,9 @@ movemouse(const Arg *arg)
 
 	if (!(c = selmon->sel))
 		return;
-	if (c->isfullscreen) /* no support moving fullscreen windows by mouse */
+        /*fakefullscreen*/
+        if (c->isfullscreen
+        &&  !c->isfakefullscreen) /* no support moving fullscreen windows by mouse */
 		return;
 	restack(selmon);
 	ocx = c->x;
@@ -1267,6 +1320,18 @@ moveresize(const Arg *arg) {
 }
 /*moveresize*/
 
+/*attach aside*/
+ Client *
+nexttagged(Client *c) {
+       Client *walked = c->mon->clients;
+       for(;
+               walked && (walked->isfloating || !ISVISIBLEONTAG(walked, c->tags));
+               walked = walked->next
+       );
+       return walked;
+}
+/*attach aside*/
+
 Client *
 nexttiled(Client *c)
 {
@@ -1373,7 +1438,9 @@ resizemouse(const Arg *arg)
 
 	if (!(c = selmon->sel))
 		return;
-	if (c->isfullscreen) /* no support resizing fullscreen windows by mouse */
+        /*fakefullscreen*/
+        if (c->isfullscreen
+        &&  !c->isfakefullscreen) /* no support resizing fullscreen windows by mouse */
 		return;
 	restack(selmon);
 	ocx = c->x;
@@ -1492,7 +1559,7 @@ sendmon(Client *c, Monitor *m)
 	detachstack(c);
 	c->mon = m;
 	c->tags = m->tagset[m->seltags]; /* assign tags of target monitor */
-	attach(c);
+	attachaside(c); /*attach side*/
 	attachstack(c);
 	focus(NULL);
 	arrange(NULL);
@@ -1551,7 +1618,10 @@ setfullscreen(Client *c, int fullscreen)
 		XChangeProperty(dpy, c->win, netatom[NetWMState], XA_ATOM, 32,
 			PropModeReplace, (unsigned char*)&netatom[NetWMFullscreen], 1);
 		c->isfullscreen = 1;
-		c->oldstate = c->isfloating;
+                /*fakefullscreen*/
+                if (c->isfakefullscreen)
+                        return;
+                c->oldstate = c->isfloating;
 		c->oldbw = c->bw;
 		c->bw = 0;
 		c->isfloating = 1;
@@ -1561,7 +1631,10 @@ setfullscreen(Client *c, int fullscreen)
 		XChangeProperty(dpy, c->win, netatom[NetWMState], XA_ATOM, 32,
 			PropModeReplace, (unsigned char*)0, 0);
 		c->isfullscreen = 0;
-		c->isfloating = c->oldstate;
+                /*fakefullscreen*/
+                if (c->isfakefullscreen)
+                        return;
+                c->isfloating = c->oldstate;
 		c->bw = c->oldbw;
 		c->x = c->oldx;
 		c->y = c->oldy;
@@ -1693,7 +1766,9 @@ showhide(Client *c)
 	if (ISVISIBLE(c)) {
 		/* show clients top down */
 		XMoveWindow(dpy, c->win, c->x, c->y);
-		if ((!c->mon->lt[c->mon->sellt]->arrange || c->isfloating) && !c->isfullscreen)
+                /*fakefullscreen*/
+                if ((!c->mon->lt[c->mon->sellt]->arrange || c->isfloating)
+                 &&  (!c->isfullscreen || c->isfakefullscreen))
 			resize(c, c->x, c->y, c->w, c->h, 0);
 		showhide(c->snext);
 	} else {
@@ -1785,7 +1860,9 @@ togglefloating(const Arg *arg)
 {
 	if (!selmon->sel)
 		return;
-	if (selmon->sel->isfullscreen) /* no support for fullscreen windows */
+        /*fakefullscreen*/
+        if (selmon->sel->isfullscreen
+        &&  !selmon->sel->isfakefullscreen) /* no support for fullscreen windows */
 		return;
 	selmon->sel->isfloating = !selmon->sel->isfloating || selmon->sel->isfixed;
 	if (selmon->sel->isfloating)
@@ -1973,6 +2050,7 @@ updategeom(void)
 					detachstack(c);
 					c->mon = mons;
 					attach(c);
+                                        attachaside(c); /*attach aside*/
 					attachstack(c);
 				}
 				if (m == selmon)

@@ -1,0 +1,4 @@
+#!/bin/sh
+pactl set-sink-volume 0 +1%
+killbar
+notify-send -i volup -t 500 -h string:x-canonical-private-synchronous:volume "Volume" "$(pamixer --get-volume-human)"

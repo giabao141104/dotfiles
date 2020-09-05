@@ -1,0 +1,5 @@
+#!/bin/sh
+
+for i in {0..15}; do
+	echo -e "\e[38;2;255;164;122;${i}m${i}\e[0m";
+done

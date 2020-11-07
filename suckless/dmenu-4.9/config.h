@@ -9,7 +9,7 @@ static int centered = 0;
 static int min_width = 0;
 /* Size of the window border */
 static const unsigned int border_width = 3;
-static const char *fonts[] = { "dwm:size=10" };
+static const char *fonts[] = { "unscii:size=12:antialias=true:autohint=true" };
 static const char *prompt      = NULL;      /* -p  option; prompt to the left of input field */
 static const char *colors[SchemeLast][2] = {
                         /*     fg         bg       */

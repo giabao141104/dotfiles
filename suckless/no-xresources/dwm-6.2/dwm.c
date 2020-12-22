@@ -57,6 +57,14 @@
 #define HEIGHT(X)               ((X)->h + 2 * (X)->bw)
 #define TAGMASK                 ((1 << LENGTH(tags)) - 1)
 #define TEXTW(X)                (drw_fontset_getwidth(drw, (X)) + lrpad)
+/* decorhints */
+#define MWM_HINTS_FLAGS_FIELD       0
+#define MWM_HINTS_DECORATIONS_FIELD 2
+#define MWM_HINTS_DECORATIONS       (1 << 1)
+#define MWM_DECOR_ALL               (1 << 0)
+#define MWM_DECOR_BORDER            (1 << 1)
+#define MWM_DECOR_TITLE             (1 << 3)
+/* decorhints */
 
 /* enums */
 enum { CurNormal, CurResize, CurMove, CurLast }; /* cursor */
@@ -227,6 +235,7 @@ static void updatebarpos(Monitor *m);
 static void updatebars(void);
 static void updateclientlist(void);
 static int updategeom(void);
+static void updatemotifhints(Client *c); /* decorhints */
 static void updatenumlockmask(void);
 static void updatesizehints(Client *c);
 static void updatestatus(void);
@@ -240,6 +249,7 @@ static int xerror(Display *dpy, XErrorEvent *ee);
 static int xerrordummy(Display *dpy, XErrorEvent *ee);
 static int xerrorstart(Display *dpy, XErrorEvent *ee);
 static void zoom(const Arg *arg);
+static void centeredmaster(Monitor *m); /* centeredmaster */
 
 /* variables */
 static const char broken[] = "broken";
@@ -266,7 +276,7 @@ static void (*handler[LASTEvent]) (XEvent *) = {
 	[PropertyNotify] = propertynotify,
 	[UnmapNotify] = unmapnotify
 };
-static Atom wmatom[WMLast], netatom[NetLast];
+static Atom wmatom[WMLast], netatom[NetLast], motifatom; /* decorhints */
 static int running = 1;
 static Cur *cursor[CurLast];
 static Clr **scheme;
@@ -1111,6 +1121,7 @@ manage(Window w, XWindowAttributes *wa)
 	updatewindowtype(c);
 	updatesizehints(c);
 	updatewmhints(c);
+        updatemotifhints(c); /* decorhints */
         if (c->iscentered) { /*center*/
                 c->x = c->mon->mx + (c->mon->mw - WIDTH(c)) / 2;
                 c->y = c->mon->my + (c->mon->mh - HEIGHT(c)) / 2;
@@ -1382,6 +1393,8 @@ propertynotify(XEvent *e)
 		}
 		if (ev->atom == netatom[NetWMWindowType])
 			updatewindowtype(c);
+                if (ev->atom == motifatom) /* decorhints */
+                        updatemotifhints(c);
 	}
 }
 
@@ -1710,6 +1723,7 @@ setup(void)
 	netatom[NetWMWindowType] = XInternAtom(dpy, "_NET_WM_WINDOW_TYPE", False);
 	netatom[NetWMWindowTypeDialog] = XInternAtom(dpy, "_NET_WM_WINDOW_TYPE_DIALOG", False);
 	netatom[NetClientList] = XInternAtom(dpy, "_NET_CLIENT_LIST", False);
+        motifatom = XInternAtom(dpy, "_MOTIF_WM_HINTS", False); /* decorhints */
 	/* init cursors */
 	cursor[CurNormal] = drw_cur_create(drw, XC_left_ptr);
 	cursor[CurResize] = drw_cur_create(drw, XC_sizing);
@@ -2078,6 +2092,41 @@ updategeom(void)
 	return dirty;
 }
 
+/* decorhints */
+void
+updatemotifhints(Client *c)
+{
+       Atom real;
+       int format;
+       unsigned char *p = NULL;
+       unsigned long n, extra;
+       unsigned long *motif;
+       int width, height;
+
+       if (!decorhints)
+               return;
+
+       if (XGetWindowProperty(dpy, c->win, motifatom, 0L, 5L, False, motifatom,
+                              &real, &format, &n, &extra, &p) == Success && p != NULL) {
+               motif = (unsigned long*)p;
+               if (motif[MWM_HINTS_FLAGS_FIELD] & MWM_HINTS_DECORATIONS) {
+                       width = WIDTH(c);
+                       height = HEIGHT(c);
+
+                       if (motif[MWM_HINTS_DECORATIONS_FIELD] & MWM_DECOR_ALL ||
+                           motif[MWM_HINTS_DECORATIONS_FIELD] & MWM_DECOR_BORDER ||
+                           motif[MWM_HINTS_DECORATIONS_FIELD] & MWM_DECOR_TITLE)
+                               c->bw = c->oldbw = borderpx;
+                       else
+                               c->bw = c->oldbw = 0;
+
+                       resize(c, c->x, c->y, width - (2*c->bw), height - (2*c->bw), 0);
+               }
+               XFree(p);
+       }
+}
+/* decorhints */
+
 void
 updatenumlockmask(void)
 {
@@ -2302,3 +2351,60 @@ main(int argc, char *argv[])
 	XCloseDisplay(dpy);
 	return EXIT_SUCCESS;
 }
+
+/* centeredmaster */
+void
+centeredmaster(Monitor *m)
+{
+       unsigned int i, n, h, mw, mx, my, oty, ety, tw;
+       Client *c;
+
+       /* count number of clients in the selected monitor */
+       for (n = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), n++);
+       if (n == 0)
+               return;
+
+       /* initialize areas */
+       mw = m->ww;
+       mx = 0;
+       my = 0;
+       tw = mw;
+
+       if (n > m->nmaster) {
+               /* go mfact box in the center if more than nmaster clients */
+               mw = m->nmaster ? m->ww * m->mfact : 0;
+               tw = m->ww - mw;
+
+               if (n - m->nmaster > 1) {
+                       /* only one client */
+                       mx = (m->ww - mw) / 2;
+                       tw = (m->ww - mw) / 2;
+               }
+       }
+
+       oty = 0;
+       ety = 0;
+       for (i = 0, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
+       if (i < m->nmaster) {
+               /* nmaster clients are stacked vertically, in the center
+                * of the screen */
+               h = (m->wh - my) / (MIN(n, m->nmaster) - i);
+               resize(c, m->wx + mx, m->wy + my, mw - (2*c->bw),
+                      h - (2*c->bw), 0);
+               my += HEIGHT(c);
+       } else {
+               /* stack clients are stacked vertically */
+               if ((i - m->nmaster) % 2 ) {
+                       h = (m->wh - ety) / ( (1 + n - i) / 2);
+                       resize(c, m->wx, m->wy + ety, tw - (2*c->bw),
+                              h - (2*c->bw), 0);
+                       ety += HEIGHT(c);
+               } else {
+                       h = (m->wh - oty) / ((1 + n - i) / 2);
+                       resize(c, m->wx + mx + mw, m->wy + oty,
+                              tw - (2*c->bw), h - (2*c->bw), 0);
+                       oty += HEIGHT(c);
+               }
+       }
+}
+/* centeredmaster */

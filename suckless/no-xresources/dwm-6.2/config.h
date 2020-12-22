@@ -34,6 +34,7 @@ static const Rule rules[] = {
 { "mpv",      NULL,       NULL,       0,            1,           1,           0,                 -1 },
 { "Sxiv",     NULL,       NULL,       0,            1,           1,           0,                 -1 },
 { "Dragon",   NULL,       NULL,       0,            1,           1,           0,                 -1 },
+{ "stalonetray",NULL,     NULL,       0,            1,           1,           0,                 -1 },
 };
 
 /* layout */
@@ -44,12 +45,15 @@ static const int nmaster     = 1;
 static const int resizehints = 0;
 /* 0 : don't respect size hints
  * 1 : means respect size hints in tiled resizals */
+static const int decorhints  = 1;
+/* 1 means respect decoration hints */
 static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "[ ]",      tile },    /* first entry is default */
 	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ "[M]",      monocle },
-        { "[D]",      deck }, /*deck*/
+        { "[D]",      deck },
+        { "|M|",      centeredmaster },
 };
 
 /************/
@@ -76,6 +80,7 @@ static const char *nnn[]  = { "st", "-c", "termapp", "-g", "100x25", "-e", "nnn"
 static const char *rss[]  = { "st", "-c", "termapp", "-g", "100x25", "-e", "newsboat", "-r", "-u", "~/.config/newsboat/urls", "-C", "~/.config/newsboat/config", "-c", "~/.config/newsboat/cache", NULL };
 static const char *cal[]  = { "st", "-c", "termapp", "-g", "100x25", "-e", "calcurse", NULL };
 static const char *sdcv[]  = { "st", "-c", "termapp", "-g", "100x25", "-e", "sdcv", "--color", NULL };
+static const char *trackma[]  = { "st", "-c", "termapp", "-g", "100x25", "-e", "trackma-curses", NULL };
 static const char *calc[]  = { "st", "-c", "termapp", "-g", "100x25", "-e", "calc", NULL };
 
 #include "movestack.c" /*movestack*/
@@ -93,14 +98,17 @@ static Key keys[] = {
 	{ MODKEY,                       XK_r,      spawn,          {.v = rss } },
 	{ MODKEY,                       XK_c,      spawn,          {.v = cal } },
 	{ MODKEY,                       XK_d,      spawn,          {.v = sdcv } },
+        { MODKEY,                       XK_n,      spawn,          {.v = trackma } },
 	{ 0,               XF86XK_Calculator,      spawn,          {.v = calc } },
+        { MODKEY,                       XK_q,      spawn,          SHCMD("~/.bin/motivation") },
 
-	{ MODKEY,                       XK_s,      spawn,          SHCMD("cat ~/document/key | dmenu -c -l 44") },
+	{ MODKEY,                       XK_s,      spawn,          SHCMD("cat ~/document/key | dmenu -c -l 45") },
 	{ 0,                         XK_Menu,      spawn,          SHCMD("~/.bin/menu") },
 	{ MODKEY,                       XK_w,      spawn,          SHCMD("~/.bin/bookmark") },
-	{ MODKEY,                       XK_q,      spawn,          SHCMD("~/.bin/power") },
+	{ MODKEY,                  XK_Escape,      spawn,          SHCMD("~/.bin/power") },
 	{ MODKEY,                      XK_F1,      spawn,          SHCMD("~/.bin/dmenu_mount") },
 	{ MODKEY|ShiftMask,            XK_F1,      spawn,          SHCMD("~/.bin/dmenu_umount") },
+        { 0,                 XF86XK_Explorer,      spawn,          SHCMD("~/.bin/monitorpreset") },
 	/* Pulseaudio Control */
 	{ 0,                XF86XK_AudioMute,      spawn,          SHCMD("~/.bin/vol-mute") },
 	{ 0,         XF86XK_AudioRaiseVolume,      spawn,          SHCMD("~/.bin/vol-up") },
@@ -108,8 +116,8 @@ static Key keys[] = {
         /* MPD Control */
 	{ 0,                XF86XK_AudioNext,      spawn,          SHCMD("~/.bin/mpcnext") },
 	{ 0,                XF86XK_AudioPrev,      spawn,          SHCMD("~/.bin/mpcprev") },
-	{ 0,                XF86XK_AudioPlay,      spawn,          SHCMD("mpc toggle") },
-	{ 0,                XF86XK_AudioStop,      spawn,          SHCMD("mpc stop") },
+	{ 0,                XF86XK_AudioPlay,      spawn,          SHCMD("~/.bin/mpctoggle") },
+	{ 0,                XF86XK_AudioStop,      spawn,          SHCMD("~/.bin/mpcstop") },
 	{ 0,                    XF86XK_Tools,      spawn,          SHCMD("~/.bin/mpcshow ; ~/.bin/killbar") },
 	{ ShiftMask, XF86XK_AudioRaiseVolume,      spawn,          SHCMD("~/.bin/mpc-up") },
 	{ ShiftMask, XF86XK_AudioLowerVolume,      spawn,          SHCMD("~/.bin/mpc-down") }, 
@@ -117,16 +125,16 @@ static Key keys[] = {
 	{ 0,                        XK_Print,      spawn,          SHCMD("~/.bin/screencaptureroot") },
 	{ ControlMask,              XK_Print,      spawn,          SHCMD("~/.bin/screencapturearea") },
 	{ MODKEY|ShiftMask,             XK_c,      spawn,          SHCMD("~/.bin/colorpicker") },
-	/* dwm Control */	
+	/* dwm */	
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_i,      incnmaster,     {.i = -1 } },
-        { MODKEY|ShiftMask,             XK_j,      movestack,      {.i = +1 } }, /*movestack*/
-        { MODKEY|ShiftMask,             XK_k,      movestack,      {.i = -1 } }, /*movestack*/
-        { MODKEY|ShiftMask,             XK_l,      shiftview,      {.i = +1 } }, /*shiftview*/
-        { MODKEY|ShiftMask,             XK_h,      shiftview,      {.i = -1 } }, /*shiftview*/
+        { MODKEY|ShiftMask,             XK_j,      movestack,      {.i = +1 } },
+        { MODKEY|ShiftMask,             XK_k,      movestack,      {.i = -1 } },
+        { MODKEY|ShiftMask,             XK_l,      shiftview,      {.i = +1 } },
+        { MODKEY|ShiftMask,             XK_h,      shiftview,      {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY,                       XK_Return, zoom,           {0} },
@@ -135,9 +143,9 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY|ShiftMask,             XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY|ShiftMask,             XK_m,      setlayout,      {.v = &layouts[2]} },
-        { MODKEY|ShiftMask,             XK_d,      setlayout,      {.v = &layouts[3]} }, /*deck*/
+        { MODKEY|ShiftMask,             XK_d,      setlayout,      {.v = &layouts[3]} },
+        { MODKEY|ShiftMask,             XK_u,      setlayout,      {.v = &layouts[4]} },
 	{ MODKEY,                       XK_space,  togglefloating, {0} },
-        /*moveresize*/
         { MODKEY,                       XK_Down,   moveresize,     {.v = "0x 25y 0w 0h" } },
         { MODKEY,                       XK_Up,     moveresize,     {.v = "0x -25y 0w 0h" } },
         { MODKEY,                       XK_Right,  moveresize,     {.v = "25x 0y 0w 0h" } },
@@ -146,7 +154,6 @@ static Key keys[] = {
         { MODKEY|ShiftMask,             XK_Up,     moveresize,     {.v = "0x 0y 0w -25h" } },
         { MODKEY|ShiftMask,             XK_Right,  moveresize,     {.v = "0x 0y 25w 0h" } },
         { MODKEY|ShiftMask,             XK_Left,   moveresize,     {.v = "0x 0y -25w 0h" } },
-        /*dwm*/
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
 	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },

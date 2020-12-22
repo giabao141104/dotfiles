@@ -704,10 +704,11 @@ setup(void)
 	swa.override_redirect = True;
 	swa.background_pixel = scheme[SchemeNorm][ColBg].pixel;
 	swa.event_mask = ExposureMask | KeyPressMask | VisibilityChangeMask;
-        win = XCreateWindow(dpy, parentwin, x, y, mw, mh, border_width,
+        win = XCreateWindow(dpy, parentwin, x, y, mw, mh, border_width, /* border */
                             CopyFromParent, CopyFromParent, CopyFromParent,
 	                    CWOverrideRedirect | CWBackPixel | CWEventMask, &swa);
-	XSetWindowBorder(dpy, win, scheme[SchemeSel][ColBg].pixel);
+        if (border_width) /* border */
+                XSetWindowBorder(dpy, win, scheme[SchemeSel][ColBg].pixel);
         XSetClassHint(dpy, win, &ch);
 
 	/* open input methods */
@@ -817,6 +818,8 @@ main(int argc, char *argv[])
                         colortemp[3] = argv[++i]; /* xresources */
 		else if (!strcmp(argv[i], "-w"))   /* embedding window id */
 			embed = argv[++i];
+                else if (!strcmp(argv[i], "-bw")) /* border */
+                        border_width = atoi(argv[++i]); /* border width */
 		else
 			usage();
 

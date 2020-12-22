@@ -8,7 +8,7 @@ static int centered = 0;
 /* minimum width when centered */
 static int min_width = 0;
 /* Size of the window border */
-static const unsigned int border_width = 3;
+static unsigned int border_width = 3;
 static const char *fonts[] = { "unscii:size=12:antialias=true:autohint=true" };
 static const char *prompt      = NULL;      /* -p  option; prompt to the left of input field */
 static const char *colors[SchemeLast][2] = {

@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const char font[]        = "dwm-10";
+static const char font[]        = "unscii:size=12:antialias=true:autohint=true";
 static const char* normbgcolor  = "#5e81ac";
 static const char* normfgcolor  = "#eceff4";
 static const char* selbgcolor   = "#2e3440";

@@ -44,6 +44,7 @@ static const Rule rules[] = {
 { "mpv",      NULL,       NULL,       0,            1,           1,           0,                 -1 },
 { "Sxiv",     NULL,       NULL,       0,            1,           1,           0,                 -1 },
 { "Dragon",   NULL,       NULL,       0,            1,           1,           0,                 -1 },
+{ "stalonetray",NULL,     NULL,       0,            1,           1,           0,                 -1 },
 };
 
 /* layout */
@@ -54,6 +55,8 @@ static const int nmaster     = 1;
 static const int resizehints = 0;
 /* 0 : don't respect size hints
  * 1 : means respect size hints in tiled resizals */
+static const int decorhints  = 1;
+/* 1 means respect decoration hints */
 static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "[ ]",      tile },    /* first entry is default */

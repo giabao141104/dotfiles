@@ -11,10 +11,20 @@ static const int topbar             = 1;
 /* 0 : bottom bar
  * 1 : top bar */
 static const char *fonts[]          = { "unscii:size=12:antialias=true:autohint=true" };
-static const char *colors[][3]      = {
+static char normbgcolor[]           = "#4c566a";
+static char normbordercolor[]       = "#2e3440";
+static char normfgcolor[]           = "#eceff4";
+static char selfgcolor[]            = "#eceff4";
+static char selbordercolor[]        = "#5e81ac";
+static char selbgcolor[]            = "#2e3440";
+static char *colors[][3] = {
+       /*               fg           bg           border   */
+       [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
+       [SchemeSel]  = { selfgcolor,  selbgcolor,  selbordercolor  },
+/*static const char *colors[][3]      = {*/
 /*                fg        bg        border   */
-[SchemeNorm] = { "#eceff4","#4c566a","#2e3440" },
-[SchemeSel]  = { "#eceff4","#2e3440","#5e81ac" },
+/*[SchemeNorm] = { "#eceff4","#4c566a","#2e3440" },
+[SchemeSel]  = { "#eceff4","#2e3440","#5e81ac" },*/
 };
 static const char *tags[] = { "P", "u", "m", "p", "k", "o" };
 /* Tags Collection */
@@ -52,8 +62,7 @@ static const Layout layouts[] = {
 	{ "[ ]",      tile },    /* first entry is default */
 	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ "[M]",      monocle },
-        { "[D]",      deck },
-        { "|M|",      centeredmaster },
+        { "[D]",      deck }, /*deck*/
 };
 
 /************/
@@ -73,7 +82,7 @@ static const Layout layouts[] = {
   /*apps*/
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-c", "-i", "-l", "1", NULL };
-static const char *termcmd[]  = { "tabbed", "-cf", "-r", "2", "st", "-w", """", NULL };
+/*static const char *termcmd[]  = { "tabbed", "-cf", "-r", "2", "st", "-w", """", NULL };*/
 static const char *ncmpcpp[]  = { "st", "-c", "termapp", "-g", "100x25", "-e", "ncmpcpp", NULL };
 static const char *pulsemixer[] = { "st", "-c", "termapp", "-g", "100x25", "-e", "pulsemixer", NULL };
 static const char *nnn[]  = { "st", "-c", "termapp", "-g", "100x25", "-e", "nnn", "-C", NULL };
@@ -91,24 +100,25 @@ static Key keys[] = {
         /* Applications */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_p,      spawn,          SHCMD("st -c termapp -g 100x25") },
-	{ MODKEY,                       XK_t,      spawn,          {.v = termcmd } },
+	/*{ MODKEY,                       XK_t,      spawn,          {.v = termcmd } },*/
+	{ MODKEY,             XK_t,      spawn,          SHCMD("~/.bin/tabbed-run") },
 	{ MODKEY,                       XK_m,      spawn,          {.v = ncmpcpp } },
 	{ MODKEY,                       XK_a,      spawn,          {.v = pulsemixer } },
 	{ MODKEY,                       XK_f,      spawn,          {.v = nnn } },
 	{ MODKEY,                       XK_r,      spawn,          {.v = rss } },
 	{ MODKEY,                       XK_c,      spawn,          {.v = cal } },
 	{ MODKEY,                       XK_d,      spawn,          {.v = sdcv } },
-        { MODKEY,                       XK_n,      spawn,          {.v = trackma } },
+	{ MODKEY,                       XK_n,      spawn,          {.v = trackma } },
 	{ 0,               XF86XK_Calculator,      spawn,          {.v = calc } },
-        { MODKEY,                       XK_q,      spawn,          SHCMD("~/.bin/motivation") },
+	{ MODKEY,                       XK_q,      spawn,          SHCMD("~/.bin/motivation") },
 
-	{ MODKEY,                       XK_s,      spawn,          SHCMD("cat ~/document/key | dmenu -c -l 45") },
+	{ MODKEY,                       XK_s,      spawn,          SHCMD("cat ~/document/key | dmenu -c -l 44") },
 	{ 0,                         XK_Menu,      spawn,          SHCMD("~/.bin/menu") },
 	{ MODKEY,                       XK_w,      spawn,          SHCMD("~/.bin/bookmark") },
 	{ MODKEY,                  XK_Escape,      spawn,          SHCMD("~/.bin/power") },
 	{ MODKEY,                      XK_F1,      spawn,          SHCMD("~/.bin/dmenu_mount") },
 	{ MODKEY|ShiftMask,            XK_F1,      spawn,          SHCMD("~/.bin/dmenu_umount") },
-        { 0,                 XF86XK_Explorer,      spawn,          SHCMD("~/.bin/monitorpreset") },
+	{ 0,                 XF86XK_Explorer,      spawn,          SHCMD("~/.bin/monitorpreset") },
 	/* Pulseaudio Control */
 	{ 0,                XF86XK_AudioMute,      spawn,          SHCMD("~/.bin/vol-mute") },
 	{ 0,         XF86XK_AudioRaiseVolume,      spawn,          SHCMD("~/.bin/vol-up") },
@@ -125,16 +135,17 @@ static Key keys[] = {
 	{ 0,                        XK_Print,      spawn,          SHCMD("~/.bin/screencaptureroot") },
 	{ ControlMask,              XK_Print,      spawn,          SHCMD("~/.bin/screencapturearea") },
 	{ MODKEY|ShiftMask,             XK_c,      spawn,          SHCMD("~/.bin/colorpicker") },
-	/* dwm */	
+	{ MODKEY|ShiftMask,             XK_s,      spawn,          SHCMD("~/.bin/scheme") },
+	/* dwm Control */	
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_i,      incnmaster,     {.i = -1 } },
-        { MODKEY|ShiftMask,             XK_j,      movestack,      {.i = +1 } },
-        { MODKEY|ShiftMask,             XK_k,      movestack,      {.i = -1 } },
-        { MODKEY|ShiftMask,             XK_l,      shiftview,      {.i = +1 } },
-        { MODKEY|ShiftMask,             XK_h,      shiftview,      {.i = -1 } },
+        { MODKEY|ShiftMask,             XK_j,      movestack,      {.i = +1 } }, /*movestack*/
+        { MODKEY|ShiftMask,             XK_k,      movestack,      {.i = -1 } }, /*movestack*/
+        { MODKEY|ShiftMask,             XK_l,      shiftview,      {.i = +1 } }, /*shiftview*/
+        { MODKEY|ShiftMask,             XK_h,      shiftview,      {.i = -1 } }, /*shiftview*/
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
 	{ MODKEY,                       XK_Return, zoom,           {0} },
@@ -143,9 +154,9 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY|ShiftMask,             XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY|ShiftMask,             XK_m,      setlayout,      {.v = &layouts[2]} },
-        { MODKEY|ShiftMask,             XK_d,      setlayout,      {.v = &layouts[3]} },
-        { MODKEY|ShiftMask,             XK_u,      setlayout,      {.v = &layouts[4]} },
+        { MODKEY|ShiftMask,             XK_d,      setlayout,      {.v = &layouts[3]} }, /*deck*/
 	{ MODKEY,                       XK_space,  togglefloating, {0} },
+        /*moveresize*/
         { MODKEY,                       XK_Down,   moveresize,     {.v = "0x 25y 0w 0h" } },
         { MODKEY,                       XK_Up,     moveresize,     {.v = "0x -25y 0w 0h" } },
         { MODKEY,                       XK_Right,  moveresize,     {.v = "25x 0y 0w 0h" } },
@@ -154,12 +165,14 @@ static Key keys[] = {
         { MODKEY|ShiftMask,             XK_Up,     moveresize,     {.v = "0x 0y 0w -25h" } },
         { MODKEY|ShiftMask,             XK_Right,  moveresize,     {.v = "0x 0y 25w 0h" } },
         { MODKEY|ShiftMask,             XK_Left,   moveresize,     {.v = "0x 0y -25w 0h" } },
+        /*dwm*/
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
 	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
+        { MODKEY,                       XK_F5,     xrdb,           {.v = NULL } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
@@ -180,7 +193,7 @@ static Button buttons[] = {
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
-	{ ClkStatusText,        0,              Button2,        spawn,          SHCMD("tray") },
+	{ ClkStatusText,        0,              Button2,        spawn,          SHCMD("st -c termapp -g 100x25") },
 	{ ClkStatusText,        0,              Button3,        spawn,          SHCMD("~/.bin/killbar") },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },

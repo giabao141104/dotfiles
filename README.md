@@ -75,7 +75,7 @@ nord theme
 
 # Extra
 ## Discord mpd rich presence (mpd-pumpko)
-![mpd rich presence](mpd-rich-presence-discord/2020-07-31_04-18-12_A.png)
+![mpd rich presence](scripts/mpd-rich-presence-discord/demo.png)
 
 I modified [SSStormy's mpd-rich-presence-discord](https://github.com/SSStormy/mpd-rich-presence-discord) to change the large image. Here's how you can do it too!
 1. Dependencies: ```discord-rpc libmpdclient```

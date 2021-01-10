@@ -1,0 +1,22 @@
+#!/bin/sh
+c=$(ls ~/document/keymap/ | dmenu -c -i -l 100)
+[ -z "$c" ] && exit
+case "$c" in
+  dwm)  c=$(ls document/keymap/dwm | dmenu -c -i -l 100)
+        [ -z "$c" ] && exit
+        case "$c" in
+          area) cat ~/document/keymap/dwm/area | dmenu -c -i -l 100 ;;
+          bar) cat ~/document/keymap/dwm/bar | dmenu -c -i -l 100 ;;
+          focus) cat ~/document/keymap/dwm/focus | dmenu -c -i -l 100 ;;
+          gap) cat ~/document/keymap/dwm/gap | dmenu -c -i -l 100 ;;
+          layout) cat ~/document/keymap/dwm/layout | dmenu -c -i -l 100 ;;
+          move) cat ~/document/keymap/dwm/move | dmenu -c -i -l 100 ;;
+          movestack) cat ~/document/keymap/dwm/movestack | dmenu -c -i -l 100 ;;
+          resize) cat ~/document/keymap/dwm/resize | dmenu -c -i -l 100 ;;
+          shiftview) cat ~/document/keymap/dwm/shiftview | dmenu -c -i -l 100 ;;
+        esac
+     ;;
+  launcher) cat ~/document/keymap/launcher | dmenu -c -i -l 100 ;;
+  main) cat ~/document/keymap/main | dmenu -c -i -l 100 ;;
+  utility) cat ~/document/keymap/utility | dmenu -c -i -l 100 ;;
+esac

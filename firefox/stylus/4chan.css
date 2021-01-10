@@ -1,0 +1,60 @@
+@-moz-document domain("4channel.org"), domain("4chan.org") {
+* {
+    font-family: unscii !important;
+    font-size: 15px !important;
+}
+html, body {
+    background: #2e3440 !important;
+    color: #eceff4 !important;
+}
+.post {
+    background: #3b4252 !important;
+    color: #eceff4 !important;
+    border-right: #434c5e solid 5px !important;
+    border-bottom: #434c5e solid 5px !important;
+    border-radius: 5px !important;
+    max-width: 600px !important;
+    padding: 10px !important;
+}
+.op {
+    padding: 0px !important;
+}
+.reply:target,
+.reply.highlight {
+    background:#4c566a!important;
+    border: none !important;
+    border-right: #434c5e solid 5px !important;
+    border-bottom: #434c5e solid 5px !important;
+}
+.preview {
+    background: #4c566a !important;
+    color: #eceff4 !important;
+    border: none !important;
+    border-right: #434c5e solid 5px !important;
+    border-bottom: #434c5e solid 5px !important;
+    border-radius: 5px !important;
+    max-width: 600px !important;
+    padding: 10px !important;
+    box-shadow: 0px 0px 15px #000 !important;
+}
+
+.boardList a {
+    color: #bf616a !important;
+}
+.boardList  {
+    color: #d08770 !important;
+}
+#navtopright a {
+    color: #bf616a !important;
+}
+#navtopright {
+    color: #d08770 !important;
+}
+
+a {
+    color: #81a1c1 !important;
+}
+a:hover {
+    color: #81a1c1 !important;
+}
+}

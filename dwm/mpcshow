@@ -1,0 +1,2 @@
+#!/bin/sh
+notify-send -i note -t 3000 -h string:x-canonical-private-synchronous:song "Now playing" "$(mpc | head -1)"

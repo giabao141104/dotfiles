@@ -1,0 +1,14 @@
+max=25
+
+if $(pidof mpd > /dev/null); then
+    mpdstatus="$(mpc status)"
+
+    echo "$mpdstatus" | grep -q 'playing' && iconplay="" || iconplay=""
+    echo "$mpdstatus" | grep -q 'n/a' && icon="" || icon=" "
+
+    playing="$(echo "$mpdstatus" | awk 'NR==1 && !/^volume:/ { printf "%.'$max's", $0
+        if (length($0)>'$max') printf "..." }')"
+    printf "%s%s%s\n" "$icon" "$playing" "$iconplay" || printf "\n"
+else
+    printf "\n"
+fi

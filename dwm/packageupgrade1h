@@ -1,0 +1,5 @@
+#!/bin/sh
+while true; do
+  pacman -Qu | wc -l > ~/document/package-upgrade
+  sleep 1h
+done

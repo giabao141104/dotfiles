@@ -1,5 +1,0 @@
-#!/bin/sh
-pactl set-sink-mute 0 toggle
-killbar
-#notify-send -i volmute -t 500 -h string:x-canonical-private-synchronous:volume "$(pamixer --get-mute | if grep -q "true"; then echo "Muted"; else echo "Unmuted"; fi)"
-pamixer --get-mute | if grep -q "true"; then notify-send -i volmute -t 500 -h string:x-canonical-private-synchronous:volume "Muted"; else notify-send -i volunmute -t 500 -h string:x-canonical-private-synchronous:volume "Unmuted"; fi

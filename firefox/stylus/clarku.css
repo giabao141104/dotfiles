@@ -1,0 +1,27 @@
+@-moz-document domain("clarku.edu") {
+*{
+    font-family: unscii !important;
+    font-style: normal !important;
+    border: none !important;
+}
+html, body{
+    background: #2e3440 !important;
+    color: #d8dee9 !important;
+    width: 800px !important;
+    margin: auto !important;
+}
+a{
+    color: #5e81ac !important;
+}
+p{
+    text-indent: 25px !important;
+}
+h1, h2, h3, h4, h5 {
+    color: #81a1c1 !important;
+}
+
+.theorem{
+    background: #3b4252 !important;
+    border-radius: 10px !important;
+}
+}

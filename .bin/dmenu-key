@@ -1,2 +1,0 @@
-#!/bin/sh
-cat ~/document/key | dmenu -c -l 35

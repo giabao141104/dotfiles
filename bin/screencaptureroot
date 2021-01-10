@@ -1,3 +1,0 @@
-#!/bin/sh
-import -window root ~/image/screenshot/"$(date +"%Y-%m-%d_%H-%M-%S")_R.png"
-notify-send -i screenshot -t 5000 "Screenshot" "$(date +"%Y-%m-%d_%H-%M-%S")_R.png"

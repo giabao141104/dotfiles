@@ -1,0 +1,2 @@
+#!/bin/sh
+mpc stop && notify-send -i stop -t 3000 -h string:x-canonical-private-synchronous:mpdstatus "Mpd stopped"

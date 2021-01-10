@@ -1,0 +1,4 @@
+#!/bin/sh
+mpc next
+~/.bin/mpcshow
+~/.bin/killbar

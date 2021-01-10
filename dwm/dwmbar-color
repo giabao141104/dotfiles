@@ -1,0 +1,46 @@
+#!/bin/sh
+dwm_speed_down () {
+  echo "Down"
+  cat ~/document/speedtest-result | awk '{print $5}';}
+dwm_speed_up () {
+  echo "Up";
+  cat ~/document/speedtest-result | awk '{print $8}';}
+dwm_root () {
+  echo "Root";
+  df -H --block-size M /dev/sda3 | tail -1 | awk '{print $3}';}
+dwm_memory () {
+  echo "Memory";
+  memory=$(free -m | grep Mem | awk '{print $3}') ; memory=""$memory"M" && echo $memory;}
+dwm_package () {
+  echo "Package";
+  pacman -Q | wc -l;}
+dwm_upgrade () {
+  echo "Upgrade";
+  cat ~/document/package-upgrade;}
+dwm_audio () {
+  echo "Audio";
+  pamixer --get-volume-human;}
+dwm_time () {
+  echo "Time";
+  date +"%H:%M";}
+dwm_date () {
+  echo "Date";
+  date +"%a-%d/%m/%Y";}
+
+while true
+  do
+    status="^f-1^"
+    status="$status^b#bf616a^^c#2e3440^ "$(dwm_speed_down)" "
+    status="$status^b#2e3440^^c#bf616a^ "$(dwm_speed_up)" "
+    status="$status^b#d08770^^c#2e3440^ "$(dwm_root)" "
+    status="$status^b#2e3440^^c#d08770^ "$(dwm_memory)" "
+    status="$status^b#ebcb8b^^c#2e3440^ "$(dwm_package)" "
+    status="$status^b#2e3440^^c#ebcb8b^ "$(dwm_upgrade)" "
+    status="$status^b#a3be8c^^c#2e3440^ "$(dwm_audio)" "
+    status="$status^b#5e81ac^^c#2e3440^ "$(dwm_time)" "
+    status="$status^b#2e3440^^c#5e81ac^ "$(dwm_date)" "
+    status="$status^f-1^"
+
+    xsetroot -name "$(echo $status)"
+    sleep 1m
+done

@@ -1,0 +1,38 @@
+#!/bin/sh
+dwm_speed () {
+  echo "[ Down"
+  cat ~/document/speedtest-result | awk '{print $5}';
+  echo "Up";
+  cat ~/document/speedtest-result | awk '{print $8}';
+  echo "]";}
+dwm_root () {
+  echo "[ Root";
+  df -H --block-size M /dev/sda3 | tail -1 | awk '{print $3}';
+  echo "]";}
+dwm_package () {
+  echo "[ Package";
+  pacman -Q | wc -l;
+  echo "]";}
+dwm_upgrade () {
+  echo "[ Upgrade";
+  pacman -Qu | wc -l;
+  echo "]";}
+dwm_audio () {
+  echo "[ Audio";
+  pamixer --get-volume-human;
+  echo "]";}
+dwm_timedate () {
+  date +"[ Time %H:%M Date %a-%d/%m/%Y ]";}
+
+while true
+  do
+    status=""
+    status="$status"$(dwm_speed)""
+    status="$status"$(dwm_root)""
+    status="$status"$(dwm_package)""
+    status="$status"$(dwm_audio)""
+    status="$status"$(dwm_timedate)""
+
+    xsetroot -name "$(echo $status)"
+    sleep 1m
+done

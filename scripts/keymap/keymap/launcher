@@ -1,0 +1,10 @@
+Mod+p       │ dmenu_run
+Mod+Shift+p │ float term
+Mod+t       │ terminal
+Mod+m       │ ncmpcpp
+Mod+a       │ pulsemixer
+Mod+f       │ nnn
+Mod+r       │ newsboat
+Mod+c       │ calcurse
+Mod+d       │ StarDict
+Mod+w       │ Bookmark

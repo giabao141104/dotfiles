@@ -1,0 +1,16 @@
+Mod+`               │ toggle
+Mod+Control+Shift+0 │ defaul gap
+Mod+Plus            │ +gap
+Mod+Minus           │ -gap
+Mod+Control+i       │ +inner gap
+Mod+Control+Shift+i │ -inner gap
+Mod+Control+o       │ +outer gap
+Mod+Control+Shift+o │ -outer gap
+Mod+Control+7       │ +inner hoz gap
+Mod+Control+Shift+7 │ -inner hoz gap
+Mod+Control+8       │ +inner ver gap
+Mod+Control+Shift+8 │ -inner ver gap
+Mod+Control+9       │ +outer hoz gap
+Mod+Control+Shift+9 │ -outer hoz gap
+Mod+Control+0       │ +outer ver gap
+Mod+Control+Shift+0 │ -outer ver gap

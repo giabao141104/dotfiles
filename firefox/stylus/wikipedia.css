@@ -1,4 +1,3 @@
-@-moz-document domain("wikipedia.org") {
 * {
     border: none !important;
     box-shadow: none !important;
@@ -19,8 +18,48 @@ a:visited, .selected {
     color: #b48ead !important;
     text-decoration: none !important;
 }
-label {
+/*.toctogglelabel, .mw-collapsible-text, ::before {
+    color: #2e3440 !important;
+}
+.toctogglelabel, .mw-collapsible-text, ::after {
+    color: #2e3440 !important;
+}*/
+.toctogglelabel, .mw-collapsible-text, .toctogglespan label {
     color: #bf616a !important;
+    background: none !important;
+    padding: 5px !important;
+}
+.toctogglelabel, .mw-collapsible-text, .toctogglespan label:hover {
+    color: #eceff4 !important;
+    background: #bf616a !important;
+    border-radius: 5px !important;
+    padding: 5px !important;
+    text-decoration: none !important;
+}
+.mw-collapsible-toggle a {
+    color: #bf616a !important;
+    background: none !important;
+    padding: 5px !important;
+}
+.mw-collapsible-toggle a:hover {
+    color: #eceff4 !important;
+    background: #bf616a !important;
+    border-radius: 5px !important;
+    padding: 5px !important;
+    text-decoration: none !important;
+}
+/*.toctogglelabel, .mw-collapsible-text, :hover{
+    color: #eceff4 !important;
+    text-decoration: none !important;
+    background: #bf616a !important;
+    padding: 5px !important;
+    border-radius: 5px !important;
+}*/
+td p {
+    background: #2e3440 !important;
+}
+table.wikitable, .wikitable td {
+    border: 2px solid #4c566a !important;
 }
 
 /* NAVBAR */
@@ -39,14 +78,19 @@ label {
     border-radius: 5px !important;
 }
 
+.mw-interlanguage-selector {
+    background-color: #c4bdad !important;
+    border-radius: 4px !important;
+    filter: invert(100%) !important;
+}
 /* MAIN */
 #mw-head {
     color: #eceff4 !important;
     background: #5e81ac !important;
 }
 #mw-head-base {
-    margin-left: 0;
-    background: #5e81ac;
+    margin-left: 0 !important;
+    background: #5e81ac !important;
     box-shadow: 0 140px 0 105px #5e81ac !important;
 }
 
@@ -64,7 +108,7 @@ label {
 }
     /*Search*/
 #searchInput {
-    color: #eceff4 !important;
+    color: #2e3440 !important;
 }
 .suggestions-result, .special-query {
     color: #eceff4 !important;
@@ -103,14 +147,15 @@ label {
 .mw-body {
     color: #eceff4 !important;
     background: #3b4252 !important;
-    border-radius: 15px !important;
+    border-radius: 15px 0px 0px 15px !important;
     overflow: visible !important;
-    margin-right: 10px !important;
+    margin-right: 0px !important;
 }
 .mw-headline, #mw-toc-heading, .fn {
-    color: #eceff4 !important;
+    /*color: #eceff4 !important;*/
+    color: #bf616a !important;
     background: #3b4252 !important;
-    padding: 5px;
+    padding:5px !important;
     border-radius: 5px;    
 }
 .firstHeading, .noprint, .hatnote, .thumbcation, .tocnumber {
@@ -119,12 +164,33 @@ label {
     border-radius: 5px !important;
 }
 
-table {
+.quotebox {
+    border-radius: 5px !important;
     background: #2e3440 !important;
+}
+.mw-editsection-bracket {
+    color: #3b4252 !important;
+}
+
+.mw-editsection a {
+    color: #a3be8c !important;
+    padding: 5px !important;
+}
+.mw-editsection a:hover {
+    color: #eceff4 !important;
+    text-decoration: none !important;
+    background: #a3be8c !important;
     padding: 5px !important;
     border-radius: 5px !important;
 }
-th, td {
+.left-aligned {
+    background: #2e3440 !important;
+}
+
+table, th, td {
+    background: #2e3440 !important;
+    padding: 5px !important;
+    border-radius: 0px !important;
     color: #eceff4 !important;
 }
 
@@ -132,8 +198,22 @@ img {
     border-radius: 5px !important;
 }
 pre, code, .mwe-math-fallback-image-inline {
-    background: #d1cbbf;
+    background: #c4bdad;
     border-radius: 4px;
     filter: invert(100%);
 }
+
+.navbox {
+    background: #2e3440 !important;
+    border-radius: 5px !important;
+}
+    /*Footer*/
+.catlinks {
+    background: #2e3440 !important;
+    padding: 5px !important;
+    border-radius: 5px !important;
+}
+
+#footer-info li {
+    color: #d8dee9 !important;
 }

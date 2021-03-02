@@ -1,5 +1,5 @@
 # Self-made icons
-![note](icon/note.png)![play](icon/play.png)![screenshot](icon/screenshot.png)![stop](icon/stop.png)![toggle](icon/toggle.png)![usbgreen](icon/usbgreen.png)![usb](icon/usb.png)![usbred](icon/usbred.png)![voldown](icon/voldown.png)![volmute](icon/volmute.png)![volunmute](icon/volunmute.png)![volup](icon/volup.png)
+![note](icon/note.png) ![play](icon/play.png) ![screenshot](icon/screenshot.png) ![stop](icon/stop.png) ![toggle](icon/toggle.png) ![usbgreen](icon/usbgreen.png) ![usb](icon/usb.png) ![usbred](icon/usbred.png) ![voldown](icon/voldown.png) ![volmute](icon/volmute.png) ![volunmute](icon/volunmute.png) ![volup](icon/volup.png)
 
 # scripts
 ## Mount/Unmount using dmenu

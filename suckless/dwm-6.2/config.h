@@ -2,6 +2,7 @@
 
 static const unsigned int borderpx  = 3;        /* border pixel of windows */
 static const unsigned int snap      = 20;       /* snap pixel */
+static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 static const unsigned int gappih    = 10;       /* horiz inner gap between windows */
 static const unsigned int gappiv    = 10;       /* vert inner gap between windows */
 static const unsigned int gappoh    = 10;       /* horiz outer gap between windows and screen edge */
@@ -28,14 +29,18 @@ static const Rule rules[] = {
 /* xprop(1):
  *	WM_CLASS(STRING) = instance, class
  *	WM_NAME(STRING) = title */
-/* class      instance    title       tags mask     iscentered   isfloating   isfakefullscreen   monitor */
-{ "Gimp",     NULL,       NULL,       0,            0,           0,           0,                 -1 },
-{ "firefox",  NULL,       NULL,       1 << 8,       0,           0,           1,                 -1 },
-{ "termapp",  NULL,       NULL,       0,            1,           1,           0,                 -1 },
-{ "mpv",      NULL,       NULL,       0,            1,           1,           0,                 -1 },
-{ "Sxiv",     NULL,       NULL,       0,            1,           1,           0,                 -1 },
-{ "Dragon",   NULL,       NULL,       0,            1,           1,           0,                 -1 },
-{ "stalonetray",NULL,     NULL,       0,            1,           1,           0,                 -1 },
+/* class      instance    title       tags mask     iscentered   isfloating   isterminal    noswallow   isfakefullscreen  monitor */
+/* class      instance    title       tags mask     iscentered   sterminal    noswallow     isfloating  isfakefullscreen  monitor */
+{ "Gimp",     NULL,       NULL,       0,            0,           0,           0,            0,          0,                 -1 },
+{ "firefox",  NULL,       NULL,       1 << 8,       0,           0,          -1,            0,          1,                 -1 },
+{ "st",       NULL,       NULL,       0,            0,           1,           0,            0,          0,                 -1 }, /*swallow*/
+/*{ NULL,       NULL,   "Event Tester", 0,            0,           0,           1,            0,          0,                 -1 },*/ /*swallow*/
+{ "Zathura",  NULL,       NULL,       0,            0,           0,           1,            0,          0,                 -1 },
+{ "termapp",  NULL,       NULL,       0,            1,           1,           0,            1,          0,                 -1 },
+{ "mpv",      NULL,       NULL,       0,            1,           0,           0,            1,          0,                 -1 },
+{ "Sxiv",     NULL,       NULL,       0,            1,           0,           0,            1,          0,                 -1 },
+{ "Dragon",   NULL,       NULL,       0,            1,           0,           0,            1,          0,                 -1 },
+{ "stalonetray",NULL,     NULL,       0,            1,           0,           0,            1,          0,                 -1 },
 };
 
 /* layout */
@@ -74,6 +79,7 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-c", "-i", "-l", "1", NULL };
 static const char *termcmd[]  = { "tabbed", "-cf", "-r", "2", "st", "-w", """", NULL };
+static const char *surf[]  = { "tabbed", "-cf", "surf", "-e", NULL };
 static const char *ncmpcpp[]  = { "st", "-c", "termapp", "-g", "100x25", "-e", "ncmpcpp", NULL };
 static const char *pulsemixer[] = { "st", "-c", "termapp", "-g", "100x25", "-e", "pulsemixer", NULL };
 static const char *nnn[]  = { "st", "-c", "termapp", "-g", "100x25", "-e", "nnn", "-C", NULL };
@@ -93,6 +99,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_p,      spawn,          SHCMD("st -c termapp -g 100x25") },
 	{ MODKEY,                       XK_t,      spawn,          {.v = termcmd } },
+	{ MODKEY,                       XK_w,      spawn,          {.v = surf } },
 	{ MODKEY,                       XK_m,      spawn,          {.v = ncmpcpp } },
 	{ MODKEY,                       XK_a,      spawn,          {.v = pulsemixer } },
 	{ MODKEY,                       XK_f,      spawn,          {.v = nnn } },
@@ -106,7 +113,6 @@ static Key keys[] = {
 
 	{ MODKEY,                       XK_s,      spawn,          SHCMD("~/.bin/key") },
 	{ 0,                         XK_Menu,      spawn,          SHCMD("~/.bin/menu") },
-	{ MODKEY,                       XK_w,      spawn,          SHCMD("~/.bin/bookmark") },
 	{ MODKEY,                  XK_Escape,      spawn,          SHCMD("~/.bin/power") },
 	{ MODKEY,                      XK_F1,      spawn,          SHCMD("~/.bin/dmenu_mount") },
 	{ MODKEY|ShiftMask,            XK_F1,      spawn,          SHCMD("~/.bin/dmenu_umount") },
@@ -127,6 +133,7 @@ static Key keys[] = {
 	{ 0,                        XK_Print,      spawn,          SHCMD("~/.bin/screencaptureroot") },
 	{ ControlMask,              XK_Print,      spawn,          SHCMD("~/.bin/screencapturearea") },
 	{ MODKEY|ShiftMask,             XK_c,      spawn,          SHCMD("~/.bin/colorpicker") },
+	{ MODKEY,               XK_BackSpace,      spawn,          SHCMD("~/.bin/tray") },
 	/* dwm */	
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
@@ -198,7 +205,7 @@ static Button buttons[] = {
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
-	{ ClkStatusText,        0,              Button2,        spawn,          SHCMD("tray") },
+	{ ClkStatusText,        0,              Button2,        spawn,          SHCMD("") },
 	{ ClkStatusText,        0,              Button3,        spawn,          SHCMD("~/.bin/killbar") },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },

@@ -29,18 +29,17 @@ static const Rule rules[] = {
 /* xprop(1):
  *	WM_CLASS(STRING) = instance, class
  *	WM_NAME(STRING) = title */
-/* class      instance    title       tags mask     iscentered   isfloating   isterminal    noswallow   isfakefullscreen  monitor */
-/* class      instance    title       tags mask     iscentered   sterminal    noswallow     isfloating  isfakefullscreen  monitor */
+/* class      instance    title       tags mask     iscentered   isterminal   noswallow     isfloating  isfakefullscreen  monitor */
 { "Gimp",     NULL,       NULL,       0,            0,           0,           0,            0,          0,                 -1 },
 { "firefox",  NULL,       NULL,       1 << 8,       0,           0,          -1,            0,          1,                 -1 },
-{ "st",       NULL,       NULL,       0,            0,           1,           0,            0,          0,                 -1 }, /*swallow*/
-/*{ NULL,       NULL,   "Event Tester", 0,            0,           0,           1,            0,          0,                 -1 },*/ /*swallow*/
-{ "Zathura",  NULL,       NULL,       0,            0,           0,           1,            0,          0,                 -1 },
-{ "termapp",  NULL,       NULL,       0,            1,           1,           0,            1,          0,                 -1 },
-{ "mpv",      NULL,       NULL,       0,            1,           0,           0,            1,          0,                 -1 },
-{ "Sxiv",     NULL,       NULL,       0,            1,           0,           0,            1,          0,                 -1 },
+{ "st",       NULL,       NULL,       0,            0,           1,           0,            0,          0,                 -1 },
+{ "tabbed",   NULL,       NULL,       0,            0,           1,           0,            0,          0,                 -1 },
+{ "Zathura",  NULL,       NULL,       0,            0,           0,           0,            0,          0,                 -1 },
+{ "Sxiv",     NULL,       NULL,       0,            1,           0,           1,            1,          0,                 -1 },
+{ "mpv",      NULL,       NULL,       0,            1,           0,           1,            1,          0,                 -1 },
 { "Dragon",   NULL,       NULL,       0,            1,           0,           0,            1,          0,                 -1 },
 { "stalonetray",NULL,     NULL,       0,            1,           0,           0,            1,          0,                 -1 },
+{ "termapp",  NULL,       NULL,       0,            1,           1,           0,            1,          0,                 -1 },
 };
 
 /* layout */

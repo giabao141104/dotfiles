@@ -109,7 +109,7 @@ struct Client {
 	int basew, baseh, incw, inch, maxw, maxh, minw, minh;
 	int bw, oldbw;
 	unsigned int tags;
-	int isfixed, iscentered, isterminal, noswallow, isfloating, isurgent, neverfocus, oldstate, isfullscreen, isfakefullscreen; /*center*/ /*fakefullscreen*/ /*swallow*/
+	int isfixed, iscentered, isterminal, noswallow, isfloating, isfakefullscreen, isurgent, neverfocus, oldstate, isfullscreen; /*center*/ /*fakefullscreen*/ /*swallow*/
         pid_t pid; /*swallow*/
 	Client *next;
 	Client *snext;
@@ -161,10 +161,10 @@ typedef struct {
 	const char *title;
 	unsigned int tags;
 	int iscentered; /*center*/
-	int isfloating;
-        int isfakefullscreen; /*fakefullscreen*/
         int isterminal; /*swallow*/
         int noswallow; /*swallow*/
+	int isfloating;
+        int isfakefullscreen; /*fakefullscreen*/
 	int monitor;
 } Rule;
 

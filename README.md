@@ -1,3 +1,6 @@
+# Archiving
+Hi visitors, I'm archiving this repository since I rarely use X11 stuffs nowaday. Since 2024 I've moved to Wayland (dwl then niri) and emacs (yes). I'll be pushing my current configs here when I have time. At the point of writing this, I have to reinstall X11 and dwm to share my screen on the web, but I can't even get dwm started without crashing, lol.
+
 # Self-made icons
 ![note](icon/note.png) ![play](icon/play.png) ![screenshot](icon/screenshot.png) ![stop](icon/stop.png) ![toggle](icon/toggle.png) ![usbgreen](icon/usbgreen.png) ![usb](icon/usb.png) ![usbred](icon/usbred.png) ![voldown](icon/voldown.png) ![volmute](icon/volmute.png) ![volunmute](icon/volunmute.png) ![volup](icon/volup.png)
 
